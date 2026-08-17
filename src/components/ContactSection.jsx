@@ -21,7 +21,7 @@ export const ContactSection = () => {
     email: '',
     message: ''
   });
-  
+
   const validateForm = () => {
     if (!formData.name.trim()) {
       toast({
@@ -30,7 +30,7 @@ export const ContactSection = () => {
       });
       return false;
     }
-    
+
     if (!formData.email.trim()) {
       toast({
         title: "Email is required",
@@ -44,7 +44,7 @@ export const ContactSection = () => {
       });
       return false;
     }
-    
+
     if (!formData.message.trim() || formData.message.length < 10) {
       toast({
         title: "Message must be at least 10 characters",
@@ -52,10 +52,10 @@ export const ContactSection = () => {
       });
       return false;
     }
-    
+
     return true;
   };
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -66,11 +66,11 @@ export const ContactSection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
-    
+
     setIsSubmitting(true);
-    
+
     try {
       const response = await fetch('https://formspree.io/f/xwpbojaj', {
         method: 'POST',
@@ -91,7 +91,7 @@ export const ContactSection = () => {
       } else {
         throw new Error('Failed to send message');
       }
-    } catch (error) {
+    } catch {
       toast({
         title: "Oops! Something went wrong",
         description: "Please try again or email me directly at codewithkinu@gmail.com",
@@ -140,7 +140,7 @@ export const ContactSection = () => {
                   </a>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 hover:bg-accent/30 rounded-lg sm:rounded-xl transition-all duration-300">
                 <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-primary/10 text-primary">
                   <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -155,7 +155,7 @@ export const ContactSection = () => {
                   </a>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 hover:bg-accent/30 rounded-lg sm:rounded-xl transition-all duration-300">
                 <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-primary/10 text-primary">
                   <MapPin className="h-4 w-4 sm:h-5 sm:w-5" />
