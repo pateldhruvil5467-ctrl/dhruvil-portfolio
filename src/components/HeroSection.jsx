@@ -13,17 +13,17 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
 const codeSnippets = [
-  "import { FullStackDeveloper } from 'sahil.dev';",
+  "import { FullStackDeveloper } from 'dhruvil.dev';",
   "",
-  "const developer = new FullStackDeveloper({",
-  "  name: 'Sahil',",
-  "  stack: ['React', 'Next.js', 'Node.js', 'TypeScript'],",
-  "  focus: 'Building scalable web applications',",
+  "const developer = new SoftwareEngineer({",
+  "  name: 'Dhruvil Patel',",
+  "  stack: ['Java', 'Spring Boot', 'React', 'Python'],",
+  "  focus: 'Building software, AI, and automation systems',",
   "  status: 'Open to new opportunities'",
   "});",
   "",
   "await developer.launchPortfolio();",
-  "// Featured: E-commerce, SaaS, Enterprise, Startup MVPs",
+  "// Featured: AI, automation, full-stack, and parallel systems",
   "",
   "developer.connect();",
   "console.log('🚀 Let's build something exceptional together!');",
@@ -65,7 +65,7 @@ export const HeroSection = () => {
 
   const handleViewResume = () => {
     // Open resume in new tab
-    window.open('/Sahil-resume.pdf', '_blank', 'noopener,noreferrer');
+    window.open('/Dhruvil-Patel-Resume.pdf', '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -114,7 +114,7 @@ export const HeroSection = () => {
             </motion.div>
 
             <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
-              <span className="block text-foreground">I'm Sahil</span>
+              <span className="block text-foreground">I'm Dhruvil</span>
               <motion.span className="block bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent mt-2" animate={{ backgroundPosition: ['0%', '100%', '0%'] }} transition={{ duration: 8, repeat: Infinity }} style={{ backgroundSize: '200% 100%' }}>
                 Full-Stack Engineer
               </motion.span>
