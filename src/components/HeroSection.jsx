@@ -3,7 +3,6 @@ import {
   Code,
   Award,
   Download,
-  Shield,
   Zap,
   TrendingUp,
   Briefcase,
@@ -36,10 +35,26 @@ export const HeroSection = () => {
   const [displayedCode, setDisplayedCode] = useState("");
 
   const achievements = [
-    { number: "1+", label: "Years in Production", icon: <Shield className="h-3 w-3" /> },
-    { number: "15+", label: "Projects Delivered", icon: <TrendingUp className="h-3 w-3" /> },
-    { number: "100%", label: "Client Satisfaction", icon: <Award className="h-3 w-3" /> },
-    { number: "15+", label: "Projects completed", icon: <Zap className="h-3 w-3" /> }
+    {
+      number: "MSc",
+      label: "Software Engineering",
+      icon: <Code className="h-3 w-3" />,
+    },
+    {
+      number: "BCA",
+      label: "Computer Applications",
+      icon: <Award className="h-3 w-3" />,
+    },
+    {
+      number: "AI",
+      label: "Automation & Systems",
+      icon: <Zap className="h-3 w-3" />,
+    },
+    {
+      number: "Berlin",
+      label: "Germany",
+      icon: <Briefcase className="h-3 w-3" />,
+    },
   ];
 
   useEffect(() => {
@@ -121,7 +136,7 @@ export const HeroSection = () => {
             </motion.h1>
 
             <motion.p className="text-lg sm:text-xl text-muted-foreground mt-6 leading-relaxed max-w-2xl" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
-              I build <span className="text-primary font-semibold">high-performance web applications</span> that drive business growth. Specializing in React, Node.js, and scalable architecture for startups and enterprises.
+              I build <span className="text-primary font-semibold">software systems, AI-powered applications, and automation tools</span> with a focus on practical engineering, scalable solutions, and real-world problems.
             </motion.p>
 
             <motion.div className="grid grid-cols-2 sm:grid-cols-4 gap-4 my-8" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
