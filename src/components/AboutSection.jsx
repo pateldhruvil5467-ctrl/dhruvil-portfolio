@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Briefcase, Code, User, Download, Calendar, Sparkles, Target, Github, Linkedin, Twitter, Mail, Star } from 'lucide-react';
+import { Briefcase, Code, User, Download, Calendar, Sparkles, Target, Github, Linkedin, Mail, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const AboutSection = () => {
@@ -15,18 +15,77 @@ export const AboutSection = () => {
   ];
 
   const techStack = [
-    { category: "Frontend", items: ["React", "Next.js", "TypeScript", "JavaScript", "HTML", "Tailwind"] },
-    { category: "Backend", items: ["Node.js", "Express", "Java", "Python"] },
-    { category: "Cloud", items: ["AWS", "Docker", "Vercel", "MongoDB"] }
+    {
+      category: "Languages",
+      items: [
+        "Java",
+        "Python",
+        "JavaScript",
+        "TypeScript",
+        "C++",
+        "SQL"
+      ]
+    },
+    {
+      category: "Backend",
+      items: [
+        "Spring Boot",
+        "Node.js",
+        "Express.js",
+        "Flask",
+        "REST APIs",
+        "JWT"
+      ]
+    },
+    {
+      category: "Frontend",
+      items: [
+        "React",
+        "Vite",
+        "Tailwind CSS",
+        "HTML",
+        "CSS"
+      ]
+    },
+    {
+      category: "Data & Infrastructure",
+      items: [
+        "MySQL",
+        "PostgreSQL",
+        "MongoDB",
+        "Git",
+        "GitHub",
+        "Docker",
+        "AWS"
+      ]
+    }
   ];
 
-  const features = ["Full-stack expertise", "Clean, maintainable code", "Performance optimization", "Agile methodology", "24/7 support", "Timely delivery"];
+  const features = [
+    "Strong software engineering fundamentals",
+    "AI-powered automation",
+    "Clean and maintainable architecture",
+    "Backend and API development",
+    "Performance-oriented systems",
+    "Continuous technical learning"
+  ];
 
   const socialLinks = [
-    { icon: <Github className="h-5 w-5" />, href: "https://www.github.com/sahilmd01" },
-    { icon: <Linkedin className="h-5 w-5" />, href: "https://www.linkedin.com/in/codewithkinu" },
-    { icon: <Twitter className="h-5 w-5" />, href: "#" },
-    { icon: <Mail className="h-5 w-5" />, href: "mailto:sahilmd.dev@gmail.com" }
+    {
+      icon: <Github className="h-5 w-5" />,
+      href: "https://github.com/pateldhruvil5467-ctrl",
+      label: "GitHub"
+    },
+    {
+      icon: <Linkedin className="h-5 w-5" />,
+      href: "https://www.linkedin.com/in/dhruvil-patel12/",
+      label: "LinkedIn"
+    },
+    {
+      icon: <Mail className="h-5 w-5" />,
+      href: "mailto:pateldhruvil5467@gmail.com",
+      label: "Email"
+    }
   ];
 
   const tabContent = {
@@ -49,8 +108,8 @@ export const AboutSection = () => {
   // Programmatic download function
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = '/Sahil-resume.pdf'; // Must be in public folder
-    link.download = 'Sahil-resume.pdf';
+    link.href = '/Dhruvil-Patel-Resume.pdf'; // Must be in public folder
+    link.download = 'Dhruvil-Patel-Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -102,7 +161,11 @@ export const AboutSection = () => {
                   {/* Profile Image */}
                   <div className="relative flex-shrink-0">
                     <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-4 border-primary/20 shadow-2xl transition-all duration-500 group-hover:border-primary/40 group-hover:scale-105 md:group-hover:scale-110 relative">
-                      <img src="/profile-logo.png" alt="MD Sahil" className="w-full h-full object-cover" />
+                      <img
+                        src="/Dhruvil_Photo.jpg"
+                        alt="Dhruvil Patel"
+                        className="w-full h-full object-cover"
+                      />
                       <div className="absolute -bottom-2 -right-2 w-6 h-6 sm:w-8 sm:h-8 bg-green-500 rounded-full border-4 border-background flex items-center justify-center">
                         <div className="w-2 h-2 bg-green-300 rounded-full animate-pulse" />
                       </div>
@@ -111,8 +174,13 @@ export const AboutSection = () => {
 
                   {/* Achievements */}
                   <div className="flex-1 text-center md:text-left">
-                    <h2 className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">MD Sahil</h2>
-                    <p className="text-primary text-base sm:text-lg font-semibold mb-3 sm:mb-4">Full Stack Developer</p>
+                    <h2 className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">
+                      Dhruvil Patel
+                    </h2>
+
+                    <p className="text-primary text-base sm:text-lg font-semibold mb-3 sm:mb-4">
+                      Software Engineer
+                    </p>
                     <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
                       {achievements.map((achievement, index) => (
                         <div key={index} className={`p-2 sm:p-3 rounded-xl bg-background/50 border border-border transition-all duration-300 hover:scale-105 hover:border-primary/30 ${counter === index ? 'bg-primary/10 border-primary/50' : ''}`}>
@@ -189,10 +257,10 @@ export const AboutSection = () => {
           <div className="space-y-6 sm:space-y-8">
             {/* Work Together */}
             <div className="bg-card/50 border border-border rounded-3xl p-6 sm:p-8 backdrop-blur-xl shadow-2xl transition-all duration-500 hover:shadow-3xl hover:border-primary/40 hover:bg-card/60">
-              <h3 className="text-lg sm:text-2xl font-bold mb-4 sm:mb-6 text-center">Let's Work Together</h3>
+              <h3 className="text-lg sm:text-2xl font-bold mb-4 sm:mb-6 text-center">Let's Connect</h3>
               <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0">
                 <a href="#contact" className="flex-1 block w-full p-3 sm:p-4 bg-primary text-primary-foreground rounded-xl text-center font-semibold transition-all duration-300 hover:bg-primary/90 hover:scale-105 hover:shadow-lg group">
-                  <div className="flex items-center justify-center gap-2 sm:gap-3"><User className="h-4 sm:h-5 w-4 sm:w-5 group-hover:scale-110 transition-transform duration-300" />Start a Project</div>
+                  <div className="flex items-center justify-center gap-2 sm:gap-3"><User className="h-4 sm:h-5 w-4 sm:w-5 group-hover:scale-110 transition-transform duration-300" />Contact Me</div>
                 </a>
 
                 {/* Download Button */}
@@ -231,35 +299,50 @@ export const AboutSection = () => {
             </div>
 
             {/* Availability */}
-            <div className="bg-card/60 border border-border rounded-3xl p-4 sm:p-6 backdrop-blur-xl shadow-2xl transition-all duration-500 hover:shadow-3xl hover:border-primary/40 hover:bg-card-70">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0 mb-2 sm:mb-3">
-                <div className="flex items-center gap-2 sm:gap-3">
-                  <div className="relative">
-                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full animate-pulse" />
-                    <div className="absolute inset-0 w-2 sm:w-3 h-2 sm:h-3 bg-green-500 rounded-full animate-ping" />
-                  </div>
-                  <span className="font-semibold text-xs sm:text-sm">Available</span>
-                </div>
-                <span className="text-xs sm:text-sm text-muted-foreground bg-green-500/10 text-green-600 px-2 py-1 rounded-lg">
-                  For new projects
-                </span>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="relative">
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full animate-pulse" />
+                <div className="absolute inset-0 w-2 sm:w-3 h-2 sm:h-3 bg-green-500 rounded-full animate-ping" />
               </div>
-              <div className="text-[10px] sm:text-xs text-muted-foreground text-center bg-background/50 rounded-lg p-1 sm:p-2">
-                ⚡ Response time: Under 24 hours
-              </div>
+
+              <span className="font-semibold text-xs sm:text-sm">
+                Open to Opportunities
+              </span>
             </div>
+
+            <span className="text-xs sm:text-sm text-muted-foreground bg-green-500/10 text-green-600 px-2 py-1 rounded-lg">
+              Software Engineering
+            </span>
+
+            <div className="text-[10px] sm:text-xs text-muted-foreground text-center bg-background/50 rounded-lg p-1 sm:p-2">
+              Working Student • Internship • Junior Software Engineering
+            </div>
+
           </div>
+
+          {/* Styles */}
+          <style>
+            {`
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .animation-delay-2000 {
+      animation-delay: 2s;
+    }
+  `}
+          </style>
         </div>
       </div>
-
-      {/* Styles */}
-      <style>
-        {`
-          @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
-          .animate-float { animation: float 3s ease-in-out infinite; }
-          .animation-delay-2000 { animation-delay: 2s; }
-        `}
-      </style>
-    </section>
+    </section >
   );
 };

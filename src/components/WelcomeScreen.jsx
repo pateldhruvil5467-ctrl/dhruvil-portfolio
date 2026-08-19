@@ -29,11 +29,12 @@ const WelcomeScreen = ({ onWelcomeComplete }) => {
   };
 
   const currentColors = colors[theme] || colors.dark;
-  const portfolioUrl = "www.devlyhub.in";
+  const portfolioUrl = "Dhruvil Patel";
   const welcomeMessages = [
-    "Crafting digital experiences",
     "Software Engineer",
-    "Full-stack development"
+    "AI & Automation Enthusiast",
+    "Full-Stack Developer",
+    "Building Scalable Systems",
   ];
 
   useEffect(() => {
@@ -195,13 +196,14 @@ const WelcomeScreen = ({ onWelcomeComplete }) => {
                 style={{ color: currentColors.primary }}
                 variants={contentVariants}
               >
-                <span className="inline-block">Hello</span>
+                <span className="block">Hello</span>
+
                 <motion.span
-                  className="inline-block ml-2 sm:ml-3 relative"
+                  className="block relative"
                   style={{ color: currentColors.secondary }}
                   variants={contentVariants}
                 >
-                  There !
+                  I'm Dhruvil
                   <motion.span
                     className="absolute -bottom-1 sm:-bottom-2 left-0 h-0.5 sm:h-1 w-full"
                     style={{ backgroundColor: currentColors.secondary }}
@@ -238,7 +240,7 @@ const WelcomeScreen = ({ onWelcomeComplete }) => {
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1.5 }}
                 >
-                  (This is my portfolio website)
+                  Software Engineer • AI • Automation • Full-Stack Development
                 </motion.p>
               </motion.div>
             )}
