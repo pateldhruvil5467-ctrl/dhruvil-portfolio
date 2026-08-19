@@ -4,17 +4,14 @@ import {
   User,
   Code,
   Briefcase,
-  MessageSquare,
   Mail,
-  BookOpen,
   Sun,
   Moon,
-  Youtube,
   Volume2,
   VolumeX,
   Github,
   Linkedin,
-  Globe,
+  FileText,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -24,9 +21,7 @@ const navItems = [
   { name: "About", href: "#about", icon: User },
   { name: "Skills", href: "#skills", icon: Code },
   { name: "Projects", href: "#projects", icon: Briefcase },
-  { name: "Testimonials", href: "#testimonials", icon: MessageSquare },
   { name: "Contact", href: "#contact", icon: Mail },
-  { name: "Blog", href: "https://blogni.vercel.app", icon: BookOpen },
 ];
 
 const ThemeToggle = () => {
@@ -147,28 +142,9 @@ export const Navbar = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        {/* Website Globe Button */}
+        {/* GitHub */}
         <motion.a
-          href="https://avoliq.vercel.app"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={cn(
-            "p-2 rounded-full bg-white/80 dark:bg-black/80 backdrop-blur-md",
-            "text-green-600 hover:bg-green-100 dark:hover:bg-green-900/50",
-            "border border-gray-200 dark:border-gray-700 shadow-sm",
-            "flex items-center justify-center"
-          )}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          title="My Website"
-          aria-label="My Website"
-        >
-          <Globe className="w-5 h-5" />
-        </motion.a>
-
-        {/* GitHub Button */}
-        <motion.a
-          href="https://github.com/sahilmd01" 
+          href="https://github.com/pateldhruvil5467-ctrl"
           target="_blank"
           rel="noopener noreferrer"
           className={cn(
@@ -185,9 +161,9 @@ export const Navbar = () => {
           <Github className="w-5 h-5" />
         </motion.a>
 
-        {/* LinkedIn Button */}
+        {/* LinkedIn */}
         <motion.a
-          href="https://linkedin.com/in/codewithkinu" 
+          href="https://www.linkedin.com/in/dhruvil-patel12/"
           target="_blank"
           rel="noopener noreferrer"
           className={cn(
@@ -204,26 +180,26 @@ export const Navbar = () => {
           <Linkedin className="w-5 h-5" />
         </motion.a>
 
-        {/* YouTube Button */}
+        {/* Resume */}
         <motion.a
-          href="https://www.youtube.com/@codewithkinu"
+          href="/Dhruvil-Patel-Resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className={cn(
             "p-2 rounded-full bg-white/80 dark:bg-black/80 backdrop-blur-md",
-            "text-red-600 hover:bg-red-100 dark:hover:bg-red-900/50",
+            "text-primary hover:bg-primary/10 dark:hover:bg-primary/20",
             "border border-gray-200 dark:border-gray-700 shadow-sm",
             "flex items-center justify-center"
           )}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          title="YouTube Channel"
-          aria-label="YouTube Channel"
+          title="View Resume"
+          aria-label="View Resume"
         >
-          <Youtube className="w-5 h-5" />
+          <FileText className="w-5 h-5" />
         </motion.a>
 
-        {/* Music Button */}
+        {/* Music */}
         <motion.button
           onClick={toggleMusic}
           disabled={!isAudioReady}
@@ -237,13 +213,25 @@ export const Navbar = () => {
           whileHover={{ scale: isAudioReady ? 1.05 : 1 }}
           whileTap={{ scale: isAudioReady ? 0.95 : 1 }}
           title={
-            isAudioReady ? (isMusicPlaying ? "Pause music" : "Play music") : "Loading music..."
+            isAudioReady
+              ? isMusicPlaying
+                ? "Pause music"
+                : "Play music"
+              : "Loading music..."
           }
           aria-label={
-            isAudioReady ? (isMusicPlaying ? "Pause music" : "Play music") : "Loading music"
+            isAudioReady
+              ? isMusicPlaying
+                ? "Pause music"
+                : "Play music"
+              : "Loading music"
           }
         >
-          {isMusicPlaying ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
+          {isMusicPlaying ? (
+            <Volume2 className="w-5 h-5" />
+          ) : (
+            <VolumeX className="w-5 h-5" />
+          )}
         </motion.button>
       </motion.div>
 
