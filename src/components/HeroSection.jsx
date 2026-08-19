@@ -12,20 +12,19 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
 const codeSnippets = [
-  "import { FullStackDeveloper } from 'dhruvil.dev';",
-  "",
   "const developer = new SoftwareEngineer({",
+  "",
   "  name: 'Dhruvil Patel',",
+  "  education: 'MSc Software Engineering',",
   "  stack: ['Java', 'Spring Boot', 'React', 'Python'],",
-  "  focus: 'Building software, AI, and automation systems',",
-  "  status: 'Open to new opportunities'",
+  "  focus: ['AI', 'Automation', 'Backend Systems'],",
+  "  location: 'Berlin, Germany',",
+  "  status: 'Open to opportunities',",
+  "",
   "});",
   "",
-  "await developer.launchPortfolio();",
-  "// Featured: AI, automation, full-stack, and parallel systems",
-  "",
-  "developer.connect();",
-  "console.log('🚀 Let's build something exceptional together!');",
+  "// Building practical software for real-world problems",
+  "developer.build();",
 ];
 
 export const HeroSection = () => {
@@ -125,18 +124,23 @@ export const HeroSection = () => {
 
           <div className="flex-1 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
             <motion.div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-8 backdrop-blur-sm" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
-              <Briefcase className="h-4 w-4" /> Currently Accepting new Opportunities
+              <Briefcase className="h-4 w-4" />
+              Open to Software Engineering Opportunities
             </motion.div>
 
             <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
               <span className="block text-foreground">I'm Dhruvil</span>
               <motion.span className="block bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent mt-2" animate={{ backgroundPosition: ['0%', '100%', '0%'] }} transition={{ duration: 8, repeat: Infinity }} style={{ backgroundSize: '200% 100%' }}>
-                Full-Stack Engineer
+                Software Engineer
               </motion.span>
             </motion.h1>
 
             <motion.p className="text-lg sm:text-xl text-muted-foreground mt-6 leading-relaxed max-w-2xl" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
-              I build <span className="text-primary font-semibold">software systems, AI-powered applications, and automation tools</span> with a focus on practical engineering, scalable solutions, and real-world problems.
+              I’m an MSc Software Engineering student in Germany building
+              <span className="text-primary font-semibold">
+                full-stack applications, AI-powered automation, and backend systems
+              </span>
+              with a focus on clean architecture, performance, and solving real-world problems.
             </motion.p>
 
             <motion.div className="grid grid-cols-2 sm:grid-cols-4 gap-4 my-8" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
@@ -160,7 +164,7 @@ export const HeroSection = () => {
 
               <motion.a href="#contact" className="group relative overflow-hidden px-8 py-4 rounded-xl font-semibold border border-primary/50 text-foreground hover:border-primary transition-all duration-300 bg-background/80 backdrop-blur-sm text-sm flex items-center justify-center gap-3" whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }}>
                 <Mail className="h-4 w-4" />
-                <span>Technical Interview</span>
+                <span>Let's Connect</span>
               </motion.a>
 
               <motion.button
@@ -176,7 +180,7 @@ export const HeroSection = () => {
 
             <motion.div className="mt-6 text-center lg:text-left" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
               <div className="text-sm text-muted-foreground">
-                🚀 <span className="text-primary font-semibold">Available Immediately</span> for Full-Stack and Frontend roles
+                🚀 <span className="text-primary font-semibold">Open to opportunities</span> in Software Engineering, Full-Stack Development, and AI/Automation.
               </div>
             </motion.div>
           </div>

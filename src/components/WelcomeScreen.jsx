@@ -29,7 +29,7 @@ const WelcomeScreen = ({ onWelcomeComplete }) => {
   };
 
   const currentColors = colors[theme] || colors.dark;
-  const portfolioUrl = "Dhruvil Patel";
+  const displayName = "Dhruvil Patel";
   const welcomeMessages = [
     "Software Engineer",
     "AI & Automation Enthusiast",
@@ -58,8 +58,8 @@ const WelcomeScreen = ({ onWelcomeComplete }) => {
     if (phase >= 2) {
       let i = 0;
       const typingInterval = setInterval(() => {
-        if (i <= portfolioUrl.length) {
-          setTypedText(portfolioUrl.substring(0, i));
+        if (i <= displayName.length) {
+          setTypedText(displayName.substring(0, i));
           i++;
         } else {
           clearInterval(typingInterval);
