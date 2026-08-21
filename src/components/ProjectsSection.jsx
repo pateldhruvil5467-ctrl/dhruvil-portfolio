@@ -1,143 +1,135 @@
-import { ArrowRight, Github, ChevronUp, Star, Code, Sparkles, Zap, Play, Eye, X } from "lucide-react";
+import { ArrowRight, Github, ChevronUp, Star, Sparkles, Zap } from "lucide-react";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import PropTypes from "prop-types";
 
 const projects = [
   {
-    id: 8,
-    title: "GenAxis",
-    category: "AI SaaS ",
-    description: "AI saas webapp build with PERN stack and Intigrated Gemini . OPEN SOURCE ",
-    image: "/projects/project8.png",
-    video: "/projects/videos/genaxix-demo.mp4",
-    tags: ["PERN Stack", "Clerk Auth", "Google Gemini", "Clerk Billing", "OPEN SOURCE"],
-    demoUrl: "https://genaxis.vercel.app",
-    githubUrl: "https://github.com/Sahilmd01/genaxis",
-    featured: true,
-    accentColor: "from-emerald-500 to-teal-600",
-    status: "Live",
-    highlights: ["Image Generation", "Article writer", "Blog Writter", "Resume Reviewer"]
-  },
-  {
-    id: 7,
-    title: "NauraCare",
-    category: "Healthcare SaaS",
-    description: "Hospital management platform with multi-role access, patient tracking, and billing systems.",
-    image: "/projects/project7.png",
-    video: "/projects/videos/nauracare-demo.mp4",
-    tags: ["React", "Node.js", "MongoDB", "Stripe", "JWT Auth"],
-    demoUrl: "https://nauracare.vercel.app",
-    githubUrl: "https://github.com/Sahilmd01/neuracare",
-    featured: true,
-    accentColor: "from-emerald-500 to-teal-600",
-    status: "Live",
-    highlights: ["Multi-role system", "Patient management", "Payment integration"]
-  },
-  {
-    id: 1,
-    title: "Vante & Co.",
-    category: "E-commerce",
-    description: "Fashion marketplace with product recommendations and seamless checkout experience.",
-    image: "/projects/project1.png",
-    video: "/projects/videos/vante-demo.mp4",
-    tags: ["React", "Node.js", "Stripe", "Redis"],
-    demoUrl: "https://e-commerce-website-4w6a.vercel.app",
-    githubUrl: "https://github.com/Sahilmd01/E-commerce-website",
-    featured: true,
-    accentColor: "from-purple-500 to-indigo-600",
-    status: "Live",
-    highlights: ["Product catalog", "Shopping cart", "Payment processing"]
-  },
-  {
-    id: 2,
-    title: "Converse Pro",
-    category: "Real-time Communication",
-    description: "Chat platform with real-time messaging, media sharing, and user authentication.",
-    image: "/projects/project2.png",
-    video: "/projects/videos/converse-demo.mp4",
-    tags: ["Socket.IO", "MongoDB", "React", "WebRTC"],
-    demoUrl: "https://converse-pro-frontend.vercel.app",
-    githubUrl: "https://github.com/Sahilmd01/converse-pro",
+    id: "ai-job-search",
+    title: "AI-Powered Job Search & Shortlisting System",
+    category: "AI & Automation",
+    description:
+      "An AI- assisted job search automation system designed to reduce repetitive job discovery and shortlisting work through automated data collection, NLP - based processing, and browser automation.",
+    image: "/projects/ai-job-search.png",
+    tags: [
+      "Python",
+      "NLP",
+      "Selenium",
+      "Playwright",
+      "Automation",
+      "AI",
+    ],
+    githubUrl:
+      "https://github.com/pateldhruvil5467-ctrl/ai-job-search-agent",
     featured: true,
     accentColor: "from-blue-500 to-cyan-600",
-    status: "Live",
-    highlights: ["Real-time chat", "Media sharing", "User authentication"]
+    status: "Completed",
+    highlights: [
+      "Automated job discovery",
+      "Job data extraction and filtering",
+      "AI-assisted shortlisting",
+    ],
   },
+
   {
-    id: 3,
-    title: "Blogni AI",
-    category: "Artificial Intelligence",
-    description: "AI-powered content generation platform with multi-language support.",
-    image: "/projects/project3.png",
-    video: "/projects/videos/blogni-demo.mp4",
-    tags: ["Next.js", "Gemini AI", "Clerk Auth", "Redis"],
-    demoUrl: "https://blogni.vercel.app",
-    githubUrl: "https://github.com/Sahilmd01/Blogni",
-    accentColor: "from-amber-500 to-orange-600",
-    status: "Live",
-    highlights: ["AI content generation", "Multi-language", "User accounts"]
-  },
-  {
-    id: 4,
-    title: "Spendlix",
-    category: "FinTech",
-    description: "Financial tracking platform with expense management and budgeting features.",
-    image: "/projects/project4.png",
-    video: "/projects/videos/spendlix-demo.mp4",
-    tags: ["React", "Chart.js", "Node.js", "Firebase"],
-    demoUrl: "https://spendlix.vercel.app/login",
-    githubUrl: "https://github.com/Sahilmd01/Spendlix",
-    accentColor: "from-rose-500 to-pink-600",
-    status: "Live",
-    highlights: ["Expense tracking", "Data visualization", "Budget planning"]
-  },
-  {
-    id: 5,
-    title: "Eattoo",
-    category: "Food Tech",
-    description: "Food delivery platform with restaurant listings and order management.",
-    image: "/projects/project5.png",
-    video: "/projects/videos/eattoo-demo.mp4",
-    tags: ["React", "Redux", "Mapbox", "Stripe"],
-    demoUrl: "https://eattoo-food-delivery-website-frontend.onrender.com/",
-    githubUrl: "https://github.com/Sahilmd01/Eattoo-food-delivery-website",
-    accentColor: "from-violet-500 to-purple-600",
-    status: "Live",
-    highlights: ["Restaurant listings", "Order system", "Location services"]
-  },
-  {
-    id: 6,
-    title: "JobQue",
-    category: "HR Tech",
-    description: "Job matching platform with candidate tracking and application management.",
-    image: "/projects/project6.png",
-    video: "/projects/videos/jobque-demo.mp4",
-    tags: ["Next.js", "PostgreSQL", "Redis", "AI Integration"],
-    demoUrl: "#",
-    githubUrl: "#",
+    id: "parallel-financial-analytics",
+    title: "Parallel Financial Analytics System",
+    category: "Systems & Performance",
+    description:
+      "A C++ financial analytics system that processes historical Tesla stock data using sequential and parallel algorithms, with benchmarking to compare performance across execution strategies.",
+    image: "/projects/parallel-financial-analytics.png",
+    tags: [
+      "C++",
+      "OpenMP",
+      "MPI",
+      "Multithreading",
+      "Parallel Computing",
+      "Benchmarking",
+    ],
+    githubUrl:
+      "https://github.com/pateldhruvil5467-ctrl/ParallelFinancialAnalytics",
+    featured: true,
     accentColor: "from-orange-500 to-red-600",
-    status: "Development",
-    highlights: ["Job matching", "Candidate tracking", "Application system"]
-  }
+    status: "Completed",
+    highlights: [
+      "Real-world financial dataset",
+      "Sequential vs parallel processing",
+      "Performance benchmarking",
+    ],
+  },
+
+  {
+    id: "technocloud",
+    title: "TechnoCloud",
+    category: "Full Stack",
+    description:
+      "A full-stack music application built with React and Node.js, combining a responsive frontend with backend services for application data and user interactions.",
+    image: "/projects/technocloud.png",
+    tags: [
+      "React",
+      "Node.js",
+      "JavaScript",
+      "REST APIs",
+      "Full Stack",
+      "Git",
+    ],
+    githubUrl:
+      "https://github.com/pateldhruvil5467-ctrl/technocloud",
+    featured: true,
+    accentColor: "from-purple-500 to-indigo-600",
+    status: "Completed",
+    highlights: [
+      "Full-stack application architecture",
+      "React-based frontend",
+      "Node.js backend services",
+    ],
+  },
+
+  {
+    id: "password-security-analyzer",
+    title: "Smart Password Security Analyzer",
+    category: "Security",
+    description:
+      "A Python-based password security application that analyzes password strength and applies security-focused techniques to help users understand password resilience.",
+    image: "/projects/password-security-analyzer.png",
+    tags: [
+      "Python",
+      "Flask",
+      "Password Security",
+      "zxcvbn",
+      "Hashing",
+    ],
+    githubUrl:
+      "https://github.com/pateldhruvil5467-ctrl/multi-attack-password-analyzer",
+    featured: false,
+    accentColor: "from-emerald-500 to-teal-600",
+    status: "Completed",
+    highlights: [
+      "Password strength analysis",
+      "Security-focused validation",
+      "Hashing techniques",
+    ],
+  },
 ];
 
 const categoryColors = {
-  "Healthcare SaaS": "from-emerald-500/20 to-teal-600/20 text-emerald-600 border-emerald-500/30",
-  "E-commerce": "from-purple-500/20 to-indigo-600/20 text-purple-600 border-purple-500/30",
-  "Real-time Communication": "from-blue-500/20 to-cyan-600/20 text-blue-600 border-blue-500/30",
-  "Artificial Intelligence": "from-amber-500/20 to-orange-600/20 text-amber-600 border-amber-500/30",
-  "FinTech": "from-rose-500/20 to-pink-600/20 text-rose-600 border-rose-500/30",
-  "Food Tech": "from-violet-500/20 to-purple-600/20 text-violet-600 border-violet-500/30",
-  "HR Tech": "from-orange-500/20 to-red-600/20 text-orange-600 border-orange-500/30"
+  "AI & Automation":
+    "from-blue-500/20 to-cyan-600/20 text-blue-600 border-blue-500/30",
+
+  "Systems & Performance":
+    "from-orange-500/20 to-red-600/20 text-orange-600 border-orange-500/30",
+
+  "Full Stack":
+    "from-purple-500/20 to-indigo-600/20 text-purple-600 border-purple-500/30",
+
+  Security:
+    "from-emerald-500/20 to-teal-600/20 text-emerald-600 border-emerald-500/30",
 };
 
 export const ProjectsSection = () => {
   const [showAll, setShowAll] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
   const [hoveredProject, setHoveredProject] = useState(null);
-  const [selectedVideo, setSelectedVideo] = useState(null);
-  const videoRef = useRef(null);
   const sectionRef = useRef(null);
 
   const filteredProjects = activeFilter === "All"
@@ -152,18 +144,6 @@ export const ProjectsSection = () => {
     setActiveFilter(category);
     setShowAll(false);
     // setIsMobileFilterOpen(false);
-  };
-
-  const handleVideoPlay = (project) => {
-    setSelectedVideo(project);
-  };
-
-  const handleCloseVideo = () => {
-    setSelectedVideo(null);
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
   };
 
   const ProjectHighlights = ({ highlights }) => (
@@ -283,7 +263,7 @@ export const ProjectsSection = () => {
               >
                 <div className="relative bg-background border border-border rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 h-full flex flex-col">
 
-                  {/* Image/Video Section */}
+                  {/* Project Image */}
                   <div className="relative h-48 overflow-hidden">
                     <motion.img
                       src={project.image}
@@ -315,30 +295,19 @@ export const ProjectsSection = () => {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: hoveredProject === project.id ? 1 : 0 }}
                     >
-                      {/* Video Play Button */}
-                      <motion.button
-                        onClick={() => handleVideoPlay(project)}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="p-3 rounded-full backdrop-blur-sm border bg-white/20 text-white border-white/30 hover:bg-white/30 transition-all duration-300"
-                      >
-                        <Play size={20} />
-                      </motion.button>
+
 
                       {/* Code Button */}
                       <motion.a
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className={`p-3 rounded-full backdrop-blur-sm border transition-all duration-300 ${project.githubUrl === "#"
-                          ? "bg-gray-500/50 text-gray-300 border-gray-500/30 cursor-not-allowed"
-                          : "bg-white/20 text-white border-white/30 hover:bg-white/30"
-                          }`}
-                        onClick={(e) => project.githubUrl === "#" && e.preventDefault()}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-medium border border-border text-foreground hover:border-primary hover:bg-primary/5 transition-all duration-300"
                       >
-                        <Code size={20} />
+                        <Github size={16} />
+                        View Code
                       </motion.a>
                     </motion.div>
                   </div>
@@ -386,44 +355,24 @@ export const ProjectsSection = () => {
                       ))}
                     </div>
 
-                    {/* Action Buttons */}
+                    {/* Project Actions */}
                     <div className="flex gap-3 pt-4 border-t border-border">
-                      <motion.a
-                        href={project.demoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className={`flex-1 inline-flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 ${project.demoUrl === "#"
-                          ? "bg-muted text-muted-foreground cursor-not-allowed border border-border"
-                          : "bg-primary text-primary-foreground hover:bg-primary/90"
-                          }`}
-                        onClick={(e) => project.demoUrl === "#" && e.preventDefault()}
-                      >
-                        <Eye size={16} />
-                        {project.demoUrl === "#" ? "Coming Soon" : "Live Demo"}
-                      </motion.a>
-
                       <motion.a
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className={`inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-medium border transition-all duration-300 ${project.githubUrl === "#"
-                          ? "bg-muted text-muted-foreground cursor-not-allowed border-border"
-                          : "bg-background text-foreground border-border hover:border-primary hover:bg-primary/5"
-                          }`}
-                        onClick={(e) => project.githubUrl === "#" && e.preventDefault()}
+                        className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-medium border border-border bg-background text-foreground hover:border-primary hover:bg-primary/5 transition-all duration-300"
                       >
                         <Github size={16} />
-                        Code
+                        View Code
                       </motion.a>
                     </div>
-                  </div>
 
-                  {/* Accent Border */}
-                  <div className={`h-1 bg-gradient-to-r ${project.accentColor}`} />
+                    {/* Accent Border */}
+                    <div className={`h-1 bg-gradient-to-r ${project.accentColor}`} />
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -499,7 +448,7 @@ export const ProjectsSection = () => {
               </motion.a>
 
               <motion.a
-                href="https://github.com/sahilmd01"
+                href="https://github.com/pateldhruvil5467-ctrl"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
@@ -513,101 +462,6 @@ export const ProjectsSection = () => {
           </div>
         </motion.div>
       </div>
-
-      {/* Video Modal */}
-      <AnimatePresence>
-        {selectedVideo && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
-            onClick={handleCloseVideo}
-          >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ type: "spring", damping: 25 }}
-              className="relative bg-background rounded-2xl overflow-hidden shadow-2xl max-w-4xl w-full max-h-[80vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Modal Header */}
-              <div className="flex items-center justify-between p-6 border-b border-border">
-                <div>
-                  <h3 className="text-xl font-bold text-foreground">
-                    {selectedVideo.title} Demo
-                  </h3>
-                  <p className="text-muted-foreground text-sm">
-                    {selectedVideo.category}
-                  </p>
-                </div>
-                <motion.button
-                  onClick={handleCloseVideo}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="p-2 rounded-full hover:bg-muted transition-colors duration-200"
-                >
-                  <X size={24} />
-                </motion.button>
-              </div>
-
-              {/* Video Player */}
-              <div className="aspect-video bg-black">
-                <video
-                  ref={videoRef}
-                  src={selectedVideo.video}
-                  controls
-                  autoPlay
-                  className="w-full h-full object-contain"
-                  onEnded={handleCloseVideo}
-                >
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-
-              {/* Modal Footer */}
-              <div className="p-6 border-t border-border">
-                <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
-                  <p className="text-muted-foreground text-sm flex-1">
-                    Watch the demo of {selectedVideo.title} in action
-                  </p>
-                  <div className="flex gap-3">
-                    <motion.a
-                      href={selectedVideo.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`px-6 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${selectedVideo.demoUrl === "#"
-                        ? "bg-muted text-muted-foreground cursor-not-allowed border border-border"
-                        : "bg-primary text-primary-foreground hover:bg-primary/90"
-                        }`}
-                      onClick={(e) => selectedVideo.demoUrl === "#" && e.preventDefault()}
-                    >
-                      Visit Live Site
-                    </motion.a>
-                    <motion.a
-                      href={selectedVideo.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`px-6 py-2 rounded-lg text-sm font-medium border transition-all duration-300 ${selectedVideo.githubUrl === "#"
-                        ? "bg-muted text-muted-foreground cursor-not-allowed border-border"
-                        : "bg-background text-foreground border-border hover:border-primary hover:bg-primary/5"
-                        }`}
-                      onClick={(e) => selectedVideo.githubUrl === "#" && e.preventDefault()}
-                    >
-                      View Code
-                    </motion.a>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };

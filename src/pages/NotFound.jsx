@@ -170,7 +170,7 @@ export const NotFound = () => {
           </Link>
 
           <motion.a
-            href="https://github.com/Sahilmd01"
+            href="https://github.com/pateldhruvil5467-ctrl"
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 justify-center group relative overflow-hidden px-4 py-2 sm:px-5 sm:py-3 rounded-xl font-semibold border border-primary/50 text-foreground hover:border-primary transition-all duration-300 bg-background/80 backdrop-blur-sm flex items-center gap-2 text-xs sm:text-sm"

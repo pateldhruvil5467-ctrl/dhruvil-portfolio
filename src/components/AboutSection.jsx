@@ -1,5 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Briefcase, Code, User, Download, Calendar, Sparkles, Target, Github, Linkedin, Mail, Star } from 'lucide-react';
+import {
+  Briefcase,
+  Code,
+  User,
+  Download,
+  Sparkles,
+  Target,
+  Github,
+  Linkedin,
+  Mail,
+  Star,
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const AboutSection = () => {
@@ -8,10 +19,30 @@ export const AboutSection = () => {
   const [counter, setCounter] = useState(0);
 
   const achievements = [
-    { number: "15+", label: "Projects", icon: <Briefcase className="h-5 w-5" />, suffix: "" },
-    { number: "1", label: "Years Exp", icon: <Calendar className="h-5 w-5" />, suffix: "+" },
-    { number: "99", label: "Success", icon: <Target className="h-5 w-5" />, suffix: "%" },
-    { number: "10", label: "Clients", icon: <User className="h-5 w-5" />, suffix: "+" }
+    {
+      number: "15+",
+      label: "Projects",
+      icon: <Briefcase className="h-5 w-5" />,
+      suffix: "",
+    },
+    {
+      number: "MSc",
+      label: "Software Engineering",
+      icon: <Code className="h-5 w-5" />,
+      suffix: "",
+    },
+    {
+      number: "AI",
+      label: "Automation",
+      icon: <Target className="h-5 w-5" />,
+      suffix: "",
+    },
+    {
+      number: "Berlin",
+      label: "Germany",
+      icon: <User className="h-5 w-5" />,
+      suffix: "",
+    },
   ];
 
   const techStack = [
@@ -23,8 +54,8 @@ export const AboutSection = () => {
         "JavaScript",
         "TypeScript",
         "C++",
-        "SQL"
-      ]
+        "SQL",
+      ],
     },
     {
       category: "Backend",
@@ -34,8 +65,8 @@ export const AboutSection = () => {
         "Express.js",
         "Flask",
         "REST APIs",
-        "JWT"
-      ]
+        "JWT",
+      ],
     },
     {
       category: "Frontend",
@@ -44,11 +75,11 @@ export const AboutSection = () => {
         "Vite",
         "Tailwind CSS",
         "HTML",
-        "CSS"
-      ]
+        "CSS",
+      ],
     },
     {
-      category: "Data & Infrastructure",
+      category: "Data & Tools",
       items: [
         "MySQL",
         "PostgreSQL",
@@ -56,42 +87,49 @@ export const AboutSection = () => {
         "Git",
         "GitHub",
         "Docker",
-        "AWS"
-      ]
-    }
+        "AWS",
+      ],
+    },
   ];
 
   const features = [
     "Strong software engineering fundamentals",
+    "Backend and REST API development",
     "AI-powered automation",
     "Clean and maintainable architecture",
-    "Backend and API development",
     "Performance-oriented systems",
-    "Continuous technical learning"
+    "Collaborative project development",
   ];
 
   const socialLinks = [
     {
       icon: <Github className="h-5 w-5" />,
       href: "https://github.com/pateldhruvil5467-ctrl",
-      label: "GitHub"
+      label: "GitHub",
+      external: true,
     },
     {
       icon: <Linkedin className="h-5 w-5" />,
       href: "https://www.linkedin.com/in/dhruvil-patel12/",
-      label: "LinkedIn"
+      label: "LinkedIn",
+      external: true,
     },
     {
       icon: <Mail className="h-5 w-5" />,
       href: "mailto:pateldhruvil5467@gmail.com",
-      label: "Email"
-    }
+      label: "Email",
+      external: false,
+    },
   ];
-
   const tabContent = {
-    personal: "Passionate about creating digital solutions that make a difference. When I'm not coding, I'm exploring new technologies, contributing to open-source, and mentoring aspiring developers.",
-    professional: "With 1+ years in full-stack development, I've delivered 15+ successful projects using modern technologies. I specialize in scalable architecture and performance optimization.",
-    approach: "I believe in clean code, thorough testing, and user-centered design. My process emphasizes collaboration, agile methodologies, and continuous improvement."
+    personal:
+      "I'm passionate about building practical software that solves real problems. I enjoy exploring new technologies, turning ideas into working products, and continuously improving my engineering skills.",
+
+    professional:
+      "I'm currently pursuing an MSc in Software Engineering in Germany, with hands-on experience building full-stack applications, backend APIs, AI-powered automation, and performance-oriented systems.",
+
+    approach:
+      "I focus on clean code, maintainable architecture, testing, and practical problem solving. I also value clear communication and collaborative development when working on projects as part of a team.",
   };
 
   useEffect(() => {
@@ -137,11 +175,19 @@ export const AboutSection = () => {
             <span className="text-sm sm:text-base font-semibold text-primary tracking-wide">ABOUT ME</span>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6">
-            <span className="bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">Transforming</span>
-            <span className="block text-primary animate-pulse">Ideas Into Reality</span>
+            <span className="bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
+              Building Software
+            </span>
+            <span className="block text-primary">
+              That Solves Real Problems
+            </span>
           </h1>
+
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Building digital experiences that combine <span className="text-primary font-semibold">innovation</span>, <span className="text-primary font-semibold">performance</span>, and <span className="text-primary font-semibold">elegance</span>
+            I build practical software solutions combining{" "}
+            <span className="text-primary font-semibold">backend engineering</span>,{" "}
+            <span className="text-primary font-semibold">AI automation</span>, and{" "}
+            <span className="text-primary font-semibold">modern web technologies</span>.
           </p>
         </div>
 
@@ -311,7 +357,7 @@ export const AboutSection = () => {
             </div>
 
             <span className="text-xs sm:text-sm text-muted-foreground bg-green-500/10 text-green-600 px-2 py-1 rounded-lg">
-              Software Engineering
+              MSc Software Engineering
             </span>
 
             <div className="text-[10px] sm:text-xs text-muted-foreground text-center bg-background/50 rounded-lg p-1 sm:p-2">

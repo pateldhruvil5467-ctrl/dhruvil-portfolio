@@ -1,11 +1,9 @@
 import {
-  Instagram,
   Linkedin,
   Mail,
   MapPin,
   Phone,
   Send,
-  Twitter,
   Github,
   Loader2
 } from "lucide-react";
@@ -72,7 +70,7 @@ export const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('https://formspree.io/f/xwpbojaj', {
+      const response = await fetch("https://formspree.io/f/xwpbojaj", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -94,7 +92,7 @@ export const ContactSection = () => {
     } catch {
       toast({
         title: "Oops! Something went wrong",
-        description: "Please try again or email me directly at codewithkinu@gmail.com",
+        description: "Please try again or email me directly at pateldhruvil5467@gmail.com",
         variant: "destructive"
       });
     } finally {
@@ -133,10 +131,10 @@ export const ContactSection = () => {
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Email</p>
                   <a
-                    href="mailto:codewithkinu@gmail.com"
+                    href="mailto:pateldhruvil5467@gmail.com"
                     className="text-sm sm:text-base font-medium hover:text-primary transition-colors"
                   >
-                    codewithkinu@gmail.com
+                    pateldhruvil5467@gmail.com
                   </a>
                 </div>
               </div>
@@ -148,10 +146,10 @@ export const ContactSection = () => {
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Phone</p>
                   <a
-                    href="tel:+919315145594"
+                    href="tel:+4915565827420"
                     className="text-sm sm:text-base font-medium hover:text-primary transition-colors"
                   >
-                    +91 9315145594
+                    +49 15565827420
                   </a>
                 </div>
               </div>
@@ -163,7 +161,7 @@ export const ContactSection = () => {
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Location</p>
                   <span className="text-sm sm:text-base font-medium">
-                    Bengaluru, Karnataka India
+                    Berlin, Germany
                   </span>
                 </div>
               </div>
@@ -176,23 +174,15 @@ export const ContactSection = () => {
                   {
                     icon: Linkedin,
                     label: "LinkedIn",
-                    url: "https://www.linkedin.com/in/codewithkinu",
+                    url: "https://www.linkedin.com/in/dhruvil-patel12/",
                   },
-                  {
-                    icon: Twitter,
-                    label: "Twitter",
-                    url: "#",
-                  },
+
                   {
                     icon: Github,
                     label: "GitHub",
-                    url: "https://github.com/Sahilmd01",
+                    url: "https://github.com/pateldhruvil5467-ctrl",
                   },
-                  {
-                    icon: Instagram,
-                    label: "Instagram",
-                    url: "https://www.instagram.com/dubbinut",
-                  },
+
                 ].map((social, index) => (
                   <a
                     key={index}

@@ -136,11 +136,14 @@ export const HeroSection = () => {
             </motion.h1>
 
             <motion.p className="text-lg sm:text-xl text-muted-foreground mt-6 leading-relaxed max-w-2xl" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
-              I’m an MSc Software Engineering student in Germany building
-              <span className="text-primary font-semibold">
-                full-stack applications, AI-powered automation, and backend systems
-              </span>
-              with a focus on clean architecture, performance, and solving real-world problems.
+              <p className="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed">
+                I'm an MSc Software Engineering student in Germany building{" "}
+                <span className="font-semibold text-foreground">
+                  full-stack applications, AI-powered automation, and backend systems
+                </span>{" "}
+                with a focus on clean architecture, performance, and solving real-world
+                problems.
+              </p>
             </motion.p>
 
             <motion.div className="grid grid-cols-2 sm:grid-cols-4 gap-4 my-8" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
@@ -158,7 +161,7 @@ export const HeroSection = () => {
             <motion.div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
               <motion.a href="#projects" className="group relative overflow-hidden px-8 py-4 rounded-xl font-semibold bg-gradient-to-r from-primary to-purple-600 text-primary-foreground shadow-lg hover:shadow-xl text-sm flex items-center justify-center gap-3" whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }}>
                 <Code className="h-5 w-5" />
-                <span>View Case Studies</span>
+                <span>View Projects</span>
                 <TrendingUp className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </motion.a>
 

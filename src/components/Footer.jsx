@@ -1,8 +1,6 @@
 import {
   ArrowUp,
   Linkedin,
-  Instagram,
-  Youtube,
   Github,
   Mail,
   Phone,
@@ -13,22 +11,20 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: <Linkedin size={18} />, href: "https://linkedin.com/in/codewithkinu", label: "LinkedIn" },
-    { icon: <Instagram size={18} />, href: "https://instagram.com/dubbinut", label: "Instagram" },
-    { icon: <Youtube size={18} />, href: "https://youtube.com/@codewithkinu", label: "YouTube" },
-    { icon: <Github size={18} />, href: "https://github.com/sahilmd01", label: "GitHub" },
+    { icon: <Linkedin size={18} />, href: "https://www.linkedin.com/in/dhruvil-patel12/", label: "LinkedIn" },
+    { icon: <Github size={18} />, href: "https://github.com/pateldhruvil5467-ctrl", label: "GitHub" },
   ];
 
   const quickLinks = [
     { name: "Home", href: "#hero" },
     { name: "About", href: "#about" },
-    { name: "Work", href: "#work" },
+    { name: "Projects", href: "#projects" },
     { name: "Contact", href: "#contact" },
   ];
 
   const contactInfo = [
-    { icon: <Mail size={16} />, text: "codewithkinu@gmail.com", href: "mailto:codewithkinu@gmail.com.com" },
-    { icon: <Phone size={16} />, text: "+91 9315145594", href: "tel:+919315145594" },
+    { icon: <Mail size={16} />, text: "pateldhruvil5467@gmail.com", href: "mailto:pateldhruvil5467@gmail.com" },
+    { icon: <Phone size={16} />, text: "+49 15565827420", href: "tel:+4915565827420" },
   ];
 
   const containerVariants = {
@@ -67,9 +63,12 @@ export const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Branding */}
             <motion.div variants={itemVariants} className="space-y-4">
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white">SAHIL</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white">DHRUVIL PATEL</h3>
               <p className="text-gray-600 dark:text-gray-300 text-sm">
-                Digital designer & developer creating meaningful experiences.
+                Full-Stack Developer | React | Node.js | Next.js | Tailwind CSS
+              </p>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">
+                Connect with me on social media:
               </p>
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
@@ -168,7 +167,7 @@ export const Footer = () => {
             viewport={{ once: true }}
           >
             <div>
-              <p>© {currentYear} Sahil. All rights reserved.</p>
+              <p>© {currentYear} Dhruvil Patel. All rights reserved.</p>
             </div>
 
             <div className="flex items-center space-x-6">
