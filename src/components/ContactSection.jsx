@@ -5,7 +5,7 @@ import {
   Phone,
   Send,
   Github,
-  Loader2
+  Loader2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
@@ -14,17 +14,18 @@ import { useState } from "react";
 export const ContactSection = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
+    name: "",
+    email: "",
+    message: "",
   });
 
   const validateForm = () => {
     if (!formData.name.trim()) {
       toast({
         title: "Name is required",
-        variant: "destructive"
+        variant: "destructive",
       });
       return false;
     }
@@ -32,21 +33,23 @@ export const ContactSection = () => {
     if (!formData.email.trim()) {
       toast({
         title: "Email is required",
-        variant: "destructive"
-      });
-      return false;
-    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-      toast({
-        title: "Invalid email format",
-        variant: "destructive"
+        variant: "destructive",
       });
       return false;
     }
 
-    if (!formData.message.trim() || formData.message.length < 10) {
+    if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+      toast({
+        title: "Invalid email format",
+        variant: "destructive",
+      });
+      return false;
+    }
+
+    if (!formData.message.trim() || formData.message.trim().length < 10) {
       toast({
         title: "Message must be at least 10 characters",
-        variant: "destructive"
+        variant: "destructive",
       });
       return false;
     }
@@ -56,9 +59,10 @@ export const ContactSection = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -70,10 +74,11 @@ export const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("https://formspree.io/f/xwpbojaj", {
-        method: 'POST',
+      const response = await fetch("https://formspree.io/f/mppagnve", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -83,17 +88,26 @@ export const ContactSection = () => {
           title: "Message sent! 🎉",
           description: "I'll get back to you within 24 hours.",
           variant: "success",
-          className: "bg-green-600 text-white dark:bg-green-500 border border-green-700 shadow-lg"
+          className:
+            "bg-green-600 text-white border border-green-700 shadow-lg",
         });
-        setFormData({ name: '', email: '', message: '' });
+
+        setFormData({
+          name: "",
+          email: "",
+          message: "",
+        });
       } else {
-        throw new Error('Failed to send message');
+        throw new Error("Failed to send message");
       }
-    } catch {
+    } catch (error) {
+      console.error("Contact form error:", error);
+
       toast({
         title: "Oops! Something went wrong",
-        description: "Please try again or email me directly at pateldhruvil5467@gmail.com",
-        variant: "destructive"
+        description:
+          "Please try again or email me directly at pateldhruvil5467@gmail.com",
+        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
@@ -101,17 +115,23 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 relative bg-background">
+    <section
+      id="contact"
+      className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 relative bg-background"
+    >
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12 sm:mb-16">
           <span className="inline-block px-3 py-1 text-xs sm:text-sm font-medium rounded-full bg-primary/10 text-primary mb-3 sm:mb-4">
             Let's Connect
           </span>
+
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
             Get In Touch
           </h2>
+
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind or just want to say hi? My inbox is always open.
+            Have a project in mind or just want to say hi? My inbox is always
+            open.
           </p>
         </div>
 
@@ -124,12 +144,17 @@ export const ContactSection = () => {
             </h3>
 
             <div className="space-y-4 sm:space-y-6">
+              {/* Email */}
               <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 hover:bg-accent/30 rounded-lg sm:rounded-xl transition-all duration-300">
                 <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-primary/10 text-primary">
                   <Mail className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
+
                 <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Email</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
+                    Email
+                  </p>
+
                   <a
                     href="mailto:pateldhruvil5467@gmail.com"
                     className="text-sm sm:text-base font-medium hover:text-primary transition-colors"
@@ -139,12 +164,17 @@ export const ContactSection = () => {
                 </div>
               </div>
 
+              {/* Phone */}
               <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 hover:bg-accent/30 rounded-lg sm:rounded-xl transition-all duration-300">
                 <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-primary/10 text-primary">
                   <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
+
                 <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Phone</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
+                    Phone
+                  </p>
+
                   <a
                     href="tel:+4915565827420"
                     className="text-sm sm:text-base font-medium hover:text-primary transition-colors"
@@ -154,12 +184,17 @@ export const ContactSection = () => {
                 </div>
               </div>
 
+              {/* Location */}
               <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 hover:bg-accent/30 rounded-lg sm:rounded-xl transition-all duration-300">
                 <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-primary/10 text-primary">
                   <MapPin className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
+
                 <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Location</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
+                    Location
+                  </p>
+
                   <span className="text-sm sm:text-base font-medium">
                     Berlin, Germany
                   </span>
@@ -167,8 +202,12 @@ export const ContactSection = () => {
               </div>
             </div>
 
+            {/* Social Links */}
             <div className="pt-6 sm:pt-8">
-              <h4 className="font-medium mb-3 sm:mb-4 text-xs sm:text-sm text-muted-foreground">Find me on</h4>
+              <h4 className="font-medium mb-3 sm:mb-4 text-xs sm:text-sm text-muted-foreground">
+                Find me on
+              </h4>
+
               <div className="flex gap-2 sm:gap-3">
                 {[
                   {
@@ -176,25 +215,27 @@ export const ContactSection = () => {
                     label: "LinkedIn",
                     url: "https://www.linkedin.com/in/dhruvil-patel12/",
                   },
-
                   {
                     icon: Github,
                     label: "GitHub",
                     url: "https://github.com/pateldhruvil5467-ctrl",
                   },
+                ].map((social, index) => {
+                  const Icon = social.icon;
 
-                ].map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-accent hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300"
-                    aria-label={social.label}
-                  >
-                    <social.icon className="h-4 w-4 sm:h-5 sm:w-5" />
-                  </a>
-                ))}
+                  return (
+                    <a
+                      key={index}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-accent hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300"
+                      aria-label={social.label}
+                    >
+                      <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -206,7 +247,11 @@ export const ContactSection = () => {
               Send Me a Message
             </h3>
 
-            <form className="space-y-4 sm:space-y-6" onSubmit={handleSubmit}>
+            <form
+              className="space-y-4 sm:space-y-6"
+              onSubmit={handleSubmit}
+            >
+              {/* Name */}
               <div className="space-y-1">
                 <label
                   htmlFor="name"
@@ -214,6 +259,7 @@ export const ContactSection = () => {
                 >
                   Your Name
                 </label>
+
                 <input
                   type="text"
                   id="name"
@@ -226,6 +272,7 @@ export const ContactSection = () => {
                 />
               </div>
 
+              {/* Email */}
               <div className="space-y-1">
                 <label
                   htmlFor="email"
@@ -233,6 +280,7 @@ export const ContactSection = () => {
                 >
                   Your Email
                 </label>
+
                 <input
                   type="email"
                   id="email"
@@ -245,6 +293,7 @@ export const ContactSection = () => {
                 />
               </div>
 
+              {/* Message */}
               <div className="space-y-1">
                 <label
                   htmlFor="message"
@@ -252,6 +301,7 @@ export const ContactSection = () => {
                 >
                   Your Message
                 </label>
+
                 <textarea
                   id="message"
                   name="message"
@@ -264,6 +314,7 @@ export const ContactSection = () => {
                 />
               </div>
 
+              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={isSubmitting}
