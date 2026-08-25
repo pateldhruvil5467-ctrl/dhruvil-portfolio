@@ -1,133 +1,185 @@
-# Build a Modern Portfolio Website with React & TailwindCSS
+# Dhruvil Patel — Software Engineer Portfolio
 
-<div align="center">
-  <br />
-  <a href="https://youtu.be/YOUR_VIDEO_ID" target="_blank">
-    <img src="./banner.png" alt="Portfolio Website Banner">
-  </a>
-  <br />
-  <div>
-    <img src="https://img.shields.io/badge/-React-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React" />
-    <img src="https://img.shields.io/badge/-TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss" alt="Tailwind CSS" />
-    <img src="https://img.shields.io/badge/-Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
-    <img src="https://img.shields.io/badge/-Lucide Icons-FD4D4D?style=for-the-badge&logo=lucide" alt="Lucide Icons" />
-    <img src="https://img.shields.io/badge/-Radix UI-9D4EDD?style=for-the-badge&logo=data:image/svg+xml;base64..." alt="Radix UI" />
-  </div>
-  <h3 align="center">Create a Stunning Developer Portfolio with Animations, Dark Mode, and Projects Showcase</h3>
-  <div align="center">
-    Follow the full video tutorial on 
-    <a href="https://youtu.be/YOUR_VIDEO_ID" target="_blank"><b>YouTube</b></a>
-  </div>
-  <br />
-</div>
+Personal portfolio website showcasing my software engineering projects, technical skills, and engineering approach.
 
-## 📋 Table of Contents
+The portfolio is built as a responsive React application with a focus on clean UI, maintainable components, performance, and production deployment.
 
-1. [Introduction](#-introduction)
-2. [Tech Stack](#-tech-stack)
-3. [Features](#-features)
-4. [Quick Start](#-quick-start)
-5. [Screenshots](#-screenshots)
-6. [Deployment](#-deployment)
+## Tech Stack
 
----
+- **Frontend:** React, JavaScript, Tailwind CSS
+- **Build Tool:** Vite
+- **Animations:** Framer Motion
+- **Icons:** Lucide React
+- **Routing:** React Router
+- **Forms:** Formspree
+- **Analytics:** Vercel Analytics
+- **Code Quality:** ESLint
+- **Deployment:** Vercel
+- **Version Control:** Git & GitHub
 
-## 🚀 Introduction
+## Features
 
-In this tutorial, you'll learn how to build a modern portfolio website using **React**, **TailwindCSS**, **Vite**, and **Lucide Icons**. From dark mode support to responsive animations and deployable project showcases, this video walks you through every step—perfect for developers looking to level up their frontend skills or apply for jobs.
+- Responsive design for desktop, tablet, and mobile
+- Light and dark theme support
+- Animated UI using Framer Motion
+- Project showcase with technology details
+- Technical skills section
+- Engineering approach section
+- Resume access
+- GitHub and LinkedIn integration
+- Contact form
+- Vercel Analytics
+- Production-ready Vite build
 
-🎥 Watch the full tutorial: [YouTube](https://youtu.be/YOUR_VIDEO_ID)
+## Featured Projects
 
----
+### AI Job Search & Shortlisting System
 
-## ⚙️ Tech Stack
+AI-assisted system designed to automate parts of the job-search process, including job discovery, data extraction, and opportunity evaluation.
 
-* **React** – Component-based UI development
-* **Vite** – Lightning-fast build tool
-* **TailwindCSS** – Utility-first CSS for styling
-* **Lucide Icons** – Clean and beautiful icon pack
-* **Radix UI** – Accessible component primitives
-* **TypeScript (optional)** – Type safety and tooling
-* **GitHub & Vercel** – Deployment
+**Technologies:** Python, NLP, Selenium, Playwright
 
----
+### Parallel Financial Analytics
 
-## ⚡️ Features
+Financial data processing project exploring sequential versus parallel execution and performance optimization.
 
-* 🌑 **Light/Dark Mode Toggle**
-  Save theme preference in local storage with beautiful transitions
+**Technologies:** C++, OpenMP, MPI
 
-* 💫 **Animated Backgrounds**
-  Stars, meteors, scroll effects, and glowing UI elements
+### TechnoCloud
 
-* 📱 **Responsive Navigation**
-  Desktop and mobile menus with glassmorphism
+Full-stack music application built with a responsive frontend and backend API services.
 
-* 👨‍💻 **Hero & About Sections**
-  Showcase who you are with smooth intro animations and buttons
+**Technologies:** React, Node.js, Express.js, REST APIs
 
-* 📊 **Skills Grid**
-  Filterable progress bars and categories with animated width
+### Password Security Analyzer
 
-* 🖼️ **Projects Showcase**
-  Display screenshots, tech stacks, and GitHub/demo links
+Python-based application for analyzing password strength and applying security-oriented validation and hashing techniques.
 
-* 📩 **Contact Section**
-  Social icons + responsive contact form with toast notifications
+**Technologies:** Python, Security, Hashing, Validation
 
-* 🚀 **One-Click Deployment**
-  Easily host your site with Vercel and GitHub
-
----
-
-## 👌 Quick Start
+## Getting Started
 
 ### Prerequisites
 
-* [Node.js](https://nodejs.org/)
-* [Git](https://git-scm.com/)
+Make sure you have the following installed:
 
-### Clone and Run
+- Node.js
+- npm
+- Git
+
+### Installation
+
+Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/react-tailwind-portfolio.git
-cd react-tailwind-portfolio
+git clone https://github.com/pateldhruvil5467-ctrl/dhruvil-portfolio.git
+```
+
+Navigate to the project:
+
+```bash
+cd dhruvil-portfolio
+```
+
+Install dependencies:
+
+```bash
 npm install
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
 
-Your app will be available at: [http://localhost:5173](http://localhost:5173)
+The application will be available at:
 
----
+```text
+http://localhost:5173
+```
 
-## 🖼️ Screenshots
+## Development
 
-> 📸 Add screenshots of your Hero section, Projects grid, and Contact form here to show off your site.
+### Run the development server
 
----
+```bash
+npm run dev
+```
 
-## ☁️ Deployment
+### Run ESLint
 
-### Deploy on Vercel
+```bash
+npm run lint
+```
 
-1. Push your code to GitHub
-2. Go to [vercel.com](https://vercel.com)
-3. Import your repository
-4. Click **Deploy**
+### Create a production build
 
-Your live website will be hosted on a custom subdomain (e.g. `https://your-name.vercel.app`)
+```bash
+npm run build
+```
 
----
+### Preview the production build
 
-## 🔗 Useful Links
+```bash
+npm run preview
+```
 
-* [React Documentation](https://reactjs.org/)
-* [Tailwind CSS Docs](https://tailwindcss.com/)
-* [Lucide Icons](https://lucide.dev/)
-* [Radix UI](https://www.radix-ui.com/)
-* [Vite](https://vitejs.dev/)
-* [Vercel](https://vercel.com/)
+Before committing changes, run:
 
----
+```bash
+npm run lint
+npm run build
+git diff --check
+```
 
-Let me know if you'd like me to generate a version with your actual GitHub repo, YouTube URL, or a banner image suggestion!
+## Project Structure
+
+```text
+dhruvil-portfolio/
+├── public/
+│   ├── projects/
+│   ├── Dhruvil-Patel-Resume.pdf
+│   ├── Dhruvil_Photo.jpg
+│   ├── logo.png
+│   └── logo.svg
+│
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── hooks/
+│   ├── lib/
+│   ├── pages/
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+│
+├── .gitignore
+├── eslint.config.js
+├── index.html
+├── package.json
+├── package-lock.json
+├── vercel.json
+├── vite.config.js
+└── README.md
+```
+
+## Deployment
+
+The project is configured for deployment on Vercel.
+
+Production deployment is connected to the GitHub repository.
+
+> Production URL: **To be added after deployment**
+
+## Links
+
+- **GitHub:** https://github.com/pateldhruvil5467-ctrl
+- **LinkedIn:** https://www.linkedin.com/in/dhruvil-patel12/
+- **Email:** pateldhruvil5467@gmail.com
+
+## License
+
+This project is licensed under the MIT License.
+
+See [LICENSE](LICENSE) for details.
