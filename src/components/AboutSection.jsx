@@ -20,7 +20,7 @@ export const AboutSection = () => {
 
   const achievements = [
     {
-      number: "15+",
+      number: "5+",
       label: "Projects",
       icon: <Briefcase className="h-5 w-5" />,
       suffix: "",
