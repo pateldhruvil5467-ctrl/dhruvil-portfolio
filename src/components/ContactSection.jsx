@@ -255,7 +255,7 @@ export const ContactSection = () => {
               <div className="space-y-1">
                 <label
                   htmlFor="name"
-                  className="text-xs sm:text-sm font-medium text-muted-foreground"
+                  className="block text-left text-xs sm:text-sm font-medium text-muted-foreground"
                 >
                   Your Name
                 </label>
@@ -276,7 +276,7 @@ export const ContactSection = () => {
               <div className="space-y-1">
                 <label
                   htmlFor="email"
-                  className="text-xs sm:text-sm font-medium text-muted-foreground"
+                  className="block text-left text-xs sm:text-sm font-medium text-muted-foreground"
                 >
                   Your Email
                 </label>
@@ -297,7 +297,7 @@ export const ContactSection = () => {
               <div className="space-y-1">
                 <label
                   htmlFor="message"
-                  className="text-xs sm:text-sm font-medium text-muted-foreground"
+                  className="block text-left text-xs sm:text-sm font-medium text-muted-foreground"
                 >
                   Your Message
                 </label>
