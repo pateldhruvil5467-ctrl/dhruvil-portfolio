@@ -18,6 +18,8 @@ export const Footer = () => {
   const quickLinks = [
     { name: "Home", href: "#hero" },
     { name: "About", href: "#about" },
+    { name: "Experience", href: "#experience" },
+    { name: "Skills", href: "#skills" },
     { name: "Projects", href: "#projects" },
     { name: "Contact", href: "#contact" },
   ];
@@ -62,7 +64,7 @@ export const Footer = () => {
         >
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Branding */}
-            <motion.div variants={itemVariants} className="space-y-4">
+            <motion.div variants={itemVariants} className="space-y-4 text-left">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white">DHRUVIL PATEL</h3>
               <p className="text-gray-600 dark:text-gray-300 text-sm">
                 Full-Stack Developer | React | Node.js | Next.js | Tailwind CSS
@@ -70,7 +72,8 @@ export const Footer = () => {
               <p className="text-gray-600 dark:text-gray-300 text-sm">
                 Connect with me on social media:
               </p>
-              <div className="flex space-x-4">
+
+              <div className="flex items-center gap-4">
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={index}
@@ -136,7 +139,7 @@ export const Footer = () => {
             </motion.div>
 
             {/* Newsletter */}
-            <motion.div variants={itemVariants} className="space-y-4">
+            <motion.div variants={itemVariants} className="space-y-4 text-left">
               <h4 className="text-gray-900 dark:text-white font-medium text-sm uppercase tracking-wider">Newsletter</h4>
               <p className="text-gray-600 dark:text-gray-300 text-sm">
                 Subscribe to get updates on my latest work.
