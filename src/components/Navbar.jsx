@@ -4,6 +4,7 @@ import {
   User,
   Code,
   Briefcase,
+  BriefcaseBusiness,
   Mail,
   Sun,
   Moon,
@@ -17,6 +18,7 @@ import { cn } from "@/lib/utils";
 const navItems = [
   { name: "Home", href: "#hero", icon: Home },
   { name: "About", href: "#about", icon: User },
+  { name: "Experience", href: "#experience", icon: BriefcaseBusiness },
   { name: "Skills", href: "#skills", icon: Code },
   { name: "Projects", href: "#projects", icon: Briefcase },
   { name: "Contact", href: "#contact", icon: Mail },
