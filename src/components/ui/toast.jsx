@@ -6,7 +6,15 @@ import PropTypes from "prop-types";
 
 import { cn } from "@/lib/utils";
 
-const ToastProvider = ToastPrimitives.Provider;
+const ToastProvider = ({ children, ...props }) => (
+  <ToastPrimitives.Provider {...props}>
+    {children}
+  </ToastPrimitives.Provider>
+);
+
+ToastProvider.propTypes = {
+  children: PropTypes.node,
+};
 
 const ToastViewport = React.forwardRef(({ className, ...props }, ref) => (
   <ToastPrimitives.Viewport
