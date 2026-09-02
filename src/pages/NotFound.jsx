@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export const NotFound = () => {
   useEffect(() => {
     const originalTitle = document.title;
-    document.title = "404 - Page Not Found | Ayan Manna";
+    document.title = "404 - Page Not Found | Dhruvil Patel";
     return () => {
       document.title = originalTitle;
     };
