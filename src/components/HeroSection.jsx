@@ -27,11 +27,36 @@ const codeSnippets = [
   "developer.build();",
 ];
 
+// Randomised once per mount. Generating these during render made every
+// typing tick (every 30ms) reposition the shapes and restart their animations.
+const createFloatingShapes = () =>
+  Array.from({ length: 12 }, () => ({
+    style: {
+      width: Math.random() * 60 + 20 + 'px',
+      height: Math.random() * 60 + 20 + 'px',
+      left: Math.random() * 100 + '%',
+      top: Math.random() * 100 + '%',
+      rotate: Math.random() * 360
+    },
+    animate: {
+      y: [0, (Math.random() - 0.5) * 60],
+      x: [0, (Math.random() - 0.5) * 40],
+      opacity: [0.1, 0.25, 0.1],
+      scale: [1, 1.1, 1],
+    },
+    transition: {
+      duration: Math.random() * 6 + 4,
+      repeat: Infinity,
+      repeatType: 'reverse',
+    },
+  }));
+
 export const HeroSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   const [currentCodeLine, setCurrentCodeLine] = useState(0);
   const [displayedCode, setDisplayedCode] = useState("");
+  const [floatingShapes] = useState(createFloatingShapes);
 
   const achievements = [
     {
@@ -56,25 +81,30 @@ export const HeroSection = () => {
     },
   ];
 
+  // Each step schedules exactly one timeout and clears it on cleanup, so
+  // unmounting (or a re-run) never leaves stray timers behind.
   useEffect(() => {
     const currentLine = codeSnippets[currentCodeLine];
+    let timeoutId;
+
     if (displayedCode.length < currentLine.length) {
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         setDisplayedCode(currentLine.slice(0, displayedCode.length + 1));
       }, 30);
-    } else {
-      setTimeout(() => {
-        if (currentCodeLine < codeSnippets.length - 1) {
-          setCurrentCodeLine(prev => prev + 1);
-          setDisplayedCode("");
-        } else {
-          setTimeout(() => {
-            setCurrentCodeLine(0);
-            setDisplayedCode("");
-          }, 5000);
-        }
+    } else if (currentCodeLine < codeSnippets.length - 1) {
+      timeoutId = setTimeout(() => {
+        setCurrentCodeLine(prev => prev + 1);
+        setDisplayedCode("");
       }, 800);
+    } else {
+      // Pause on the finished snippet (800ms line delay + 5s hold), then restart.
+      timeoutId = setTimeout(() => {
+        setCurrentCodeLine(0);
+        setDisplayedCode("");
+      }, 5800);
     }
+
+    return () => clearTimeout(timeoutId);
   }, [displayedCode, currentCodeLine]);
 
   const handleViewResume = () => {
@@ -90,28 +120,13 @@ export const HeroSection = () => {
           <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.1)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black,transparent)]" />
         </div>
 
-        {[...Array(12)].map((_, i) => (
+        {floatingShapes.map((shape, i) => (
           <motion.div
             key={i}
             className="absolute bg-gradient-to-r from-primary/10 to-purple-500/10 rounded-lg"
-            style={{
-              width: Math.random() * 60 + 20 + 'px',
-              height: Math.random() * 60 + 20 + 'px',
-              left: Math.random() * 100 + '%',
-              top: Math.random() * 100 + '%',
-              rotate: Math.random() * 360
-            }}
-            animate={{
-              y: [0, (Math.random() - 0.5) * 60],
-              x: [0, (Math.random() - 0.5) * 40],
-              opacity: [0.1, 0.25, 0.1],
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: Math.random() * 6 + 4,
-              repeat: Infinity,
-              repeatType: 'reverse',
-            }}
+            style={shape.style}
+            animate={shape.animate}
+            transition={shape.transition}
           />
         ))}
 
@@ -135,7 +150,7 @@ export const HeroSection = () => {
               </motion.span>
             </motion.h1>
 
-            <motion.p className="text-lg sm:text-xl text-muted-foreground mt-6 leading-relaxed max-w-2xl" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
+            <motion.div className="text-lg sm:text-xl text-muted-foreground mt-6 leading-relaxed max-w-2xl" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
               <p className="text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed">
                 I'm an MSc Software Engineering student in Germany building{" "}
                 <span className="font-semibold text-foreground">
@@ -144,7 +159,7 @@ export const HeroSection = () => {
                 with a focus on clean architecture, performance, and solving real-world
                 problems.
               </p>
-            </motion.p>
+            </motion.div>
 
             <motion.div className="grid grid-cols-2 sm:grid-cols-4 gap-4 my-8" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
               {achievements.map((achievement, index) => (

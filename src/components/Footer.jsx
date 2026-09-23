@@ -19,6 +19,7 @@ export const Footer = () => {
     { name: "Home", href: "#hero" },
     { name: "About", href: "#about" },
     { name: "Experience", href: "#experience" },
+    { name: "Education", href: "#education" },
     { name: "Skills", href: "#skills" },
     { name: "Projects", href: "#projects" },
     { name: "Contact", href: "#contact" },
@@ -62,12 +63,12 @@ export const Footer = () => {
           viewport={{ once: true }}
           variants={containerVariants}
         >
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Branding */}
             <motion.div variants={itemVariants} className="space-y-4 text-left">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white">DHRUVIL PATEL</h3>
               <p className="text-gray-600 dark:text-gray-300 text-sm">
-                Full-Stack Developer | React | Node.js | Next.js | Tailwind CSS
+                Software Engineer | Java | Spring Boot | React | Python | AI & Automation
               </p>
               <p className="text-gray-600 dark:text-gray-300 text-sm">
                 Connect with me on social media:
@@ -137,28 +138,6 @@ export const Footer = () => {
                 ))}
               </ul>
             </motion.div>
-
-            {/* Newsletter */}
-            <motion.div variants={itemVariants} className="space-y-4 text-left">
-              <h4 className="text-gray-900 dark:text-white font-medium text-sm uppercase tracking-wider">Newsletter</h4>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">
-                Subscribe to get updates on my latest work.
-              </p>
-              <form className="space-y-3">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 dark:bg-gray-800/50 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-900 dark:focus:ring-gray-300 focus:border-gray-900 dark:focus:border-gray-300 w-full"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 dark:text-gray-900 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300 w-full"
-                >
-                  Subscribe
-                </button>
-              </form>
-            </motion.div>
           </div>
 
           {/* Bottom bar */}
@@ -174,9 +153,6 @@ export const Footer = () => {
             </div>
 
             <div className="flex items-center space-x-6">
-              <a href="#" className="hover:text-gray-900 dark:hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="hover:text-gray-900 dark:hover:text-white transition-colors">Terms</a>
-              <a href="#" className="hover:text-gray-900 dark:hover:text-white transition-colors">Cookies</a>
               <motion.a
                 href="#hero"
                 aria-label="Back to top"

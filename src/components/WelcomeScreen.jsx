@@ -8,7 +8,8 @@ const WelcomeScreen = ({ onWelcomeComplete }) => {
   const [phase, setPhase] = useState(0);
   const [exitAnimation, setExitAnimation] = useState(false);
   const [typedText, setTypedText] = useState("");
-  const { theme } = useTheme();
+  // resolvedTheme maps "system" to the actual "light"/"dark" value.
+  const { resolvedTheme: theme } = useTheme();
 
   // Theme-based colors
   const colors = {

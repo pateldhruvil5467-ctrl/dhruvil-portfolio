@@ -9,7 +9,7 @@ const projects = [
     title: "AI-Powered Job Search & Shortlisting System",
     category: "AI & Automation",
     description:
-      "An AI- assisted job search automation system designed to reduce repetitive job discovery and shortlisting work through automated data collection, NLP - based processing, and browser automation.",
+      "An AI-assisted job search automation system designed to reduce repetitive job discovery and shortlisting work through automated data collection, NLP-based processing, and browser automation.",
     image: "/projects/ai-job-search.png",
     tags: [
       "Python",
@@ -126,6 +126,16 @@ const categoryColors = {
     "from-emerald-500/20 to-teal-600/20 text-emerald-600 border-emerald-500/30",
 };
 
+// Amber is reserved for unfinished work (e.g. "In Progress"), so finished
+// projects don't read as a warning.
+const statusStyles = {
+  Live: "bg-emerald-500/20 text-emerald-600 border border-emerald-500/30",
+  Completed: "bg-sky-500/20 text-sky-600 border border-sky-500/30",
+};
+
+const defaultStatusStyle =
+  "bg-amber-500/20 text-amber-600 border border-amber-500/30";
+
 export const ProjectsSection = () => {
   const [showAll, setShowAll] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
@@ -211,7 +221,7 @@ export const ProjectsSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            A collection of projects I've built to showcase my skills in full-stack development and modern web technologies.
+            A selection of projects spanning AI-powered automation, parallel computing, full-stack development, and security.
           </motion.p>
         </motion.div>
 
@@ -274,10 +284,7 @@ export const ProjectsSection = () => {
 
                     {/* Status Badge */}
                     <div className="absolute top-3 right-3">
-                      <div className={`px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm ${project.status === "Live"
-                        ? "bg-emerald-500/20 text-emerald-600 border border-emerald-500/30"
-                        : "bg-amber-500/20 text-amber-600 border border-amber-500/30"
-                        }`}>
+                      <div className={`px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm ${statusStyles[project.status] ?? defaultStatusStyle}`}>
                         {project.status}
                       </div>
                     </div>

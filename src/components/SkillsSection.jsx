@@ -36,11 +36,13 @@ const skills = [
   { name: "TypeScript", level: "Intermediate", category: "languages", icon: "typescript" },
 
   // Backend & Databases
-  { name: "Spring Boot", level: "Intermediate", category: "backend", icon: "java" },
+  // Skills without their own logo use the generic "code" icon rather than
+  // borrowing another technology's logo.
+  { name: "Spring Boot", level: "Intermediate", category: "backend", icon: "code" },
   { name: "Node.js", level: "Intermediate", category: "backend", icon: "nodejs" },
-  { name: "REST APIs", level: "Advanced", category: "backend", icon: "nodejs" },
+  { name: "REST APIs", level: "Advanced", category: "backend", icon: "code" },
   { name: "MySQL", level: "Advanced", category: "backend", icon: "mysql" },
-  { name: "JWT Authentication", level: "Intermediate", category: "backend", icon: "java" },
+  { name: "JWT Authentication", level: "Intermediate", category: "backend", icon: "code" },
   { name: "SQL", level: "Advanced", category: "languages", icon: "sql" },
 
   // Frontend
@@ -49,10 +51,10 @@ const skills = [
   { name: "CSS3", level: "Advanced", category: "frontend", icon: "css" },
 
   // AI & Automation
-  { name: "AI Applications", level: "Intermediate", category: "ai", icon: "python" },
-  { name: "NLP", level: "Intermediate", category: "ai", icon: "python" },
-  { name: "Selenium", level: "Intermediate", category: "ai", icon: "python" },
-  { name: "Playwright", level: "Intermediate", category: "ai", icon: "python" },
+  { name: "AI Applications", level: "Intermediate", category: "ai", icon: "code" },
+  { name: "NLP", level: "Intermediate", category: "ai", icon: "code" },
+  { name: "Selenium", level: "Intermediate", category: "ai", icon: "code" },
+  { name: "Playwright", level: "Intermediate", category: "ai", icon: "code" },
 
   // Systems
   { name: "OpenMP", level: "Intermediate", category: "systems", icon: "code" },
@@ -268,7 +270,7 @@ export const SkillsSection = () => {
             My Skills
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Technologies I've mastered and my proficiency levels
+            Technologies I work with and my current proficiency levels
           </p>
         </motion.div>
 

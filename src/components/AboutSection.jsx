@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   Briefcase,
   Code,
@@ -15,12 +15,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export const AboutSection = () => {
   const [activeTab, setActiveTab] = useState('personal');
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [counter, setCounter] = useState(0);
+  const primaryShapeRef = useRef(null);
+  const secondaryShapeRef = useRef(null);
 
   const achievements = [
     {
-      number: "5+",
+      number: "4",
       label: "Projects",
       icon: <Briefcase className="h-5 w-5" />,
       suffix: "",
@@ -132,10 +133,29 @@ export const AboutSection = () => {
       "I focus on clean code, maintainable architecture, testing, and practical problem solving. I also value clear communication and collaborative development when working on projects as part of a team.",
   };
 
+  // Mouse parallax for the background shapes. Transforms are written directly
+  // to the DOM (once per frame) so mouse movement doesn't re-render the section.
   useEffect(() => {
-    const handleMouseMove = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
+    let frameId = 0;
+
+    const handleMouseMove = (e) => {
+      const { clientX: x, clientY: y } = e;
+      cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(() => {
+        if (primaryShapeRef.current) {
+          primaryShapeRef.current.style.transform = `translate(${x * 0.02}px, ${y * 0.02}px)`;
+        }
+        if (secondaryShapeRef.current) {
+          secondaryShapeRef.current.style.transform = `translate(${x * -0.03}px, ${y * -0.03}px)`;
+        }
+      });
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(frameId);
+    };
   }, []);
 
   useEffect(() => {
@@ -157,8 +177,8 @@ export const AboutSection = () => {
     <section id="about" className="relative py-16 md:py-28 px-4 sm:px-6 lg:px-12 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden">
       {/* Background Shapes */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute w-72 sm:w-96 h-72 sm:h-96 bg-primary/5 rounded-full blur-3xl transition-all duration-1000 ease-out" style={{ transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)` }} />
-        <div className="absolute w-60 sm:w-80 h-60 sm:h-80 bg-secondary/5 rounded-full blur-3xl transition-all duration-1500 ease-out" style={{ transform: `translate(${mousePosition.x * -0.03}px, ${mousePosition.y * -0.03}px)` }} />
+        <div ref={primaryShapeRef} className="absolute w-72 sm:w-96 h-72 sm:h-96 bg-primary/5 rounded-full blur-3xl transition-all duration-1000 ease-out" />
+        <div ref={secondaryShapeRef} className="absolute w-60 sm:w-80 h-60 sm:h-80 bg-secondary/5 rounded-full blur-3xl transition-all duration-1500 ease-out" />
         <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:64px_64px]" />
         <div className="absolute top-16 right-8 sm:top-20 sm:right-20 animate-float"><div className="w-6 sm:w-8 h-6 sm:h-8 bg-primary/20 rounded-lg rotate-45" /></div>
         <div className="absolute bottom-32 left-8 sm:bottom-40 sm:left-20 animate-float animation-delay-2000"><div className="w-5 sm:w-6 h-5 sm:h-6 bg-secondary/20 rounded-full" /></div>
