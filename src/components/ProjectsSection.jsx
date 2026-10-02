@@ -37,7 +37,7 @@ const projects = [
     category: "Systems & Performance",
     description:
       "A C++ financial analytics system that processes historical Tesla stock data using sequential and parallel algorithms, with benchmarking to compare performance across execution strategies.",
-    image: "/projects/parallel-financial-analytics.png",
+    image: "/projects/parallel-financial-analytics.webp",
     tags: [
       "C++",
       "OpenMP",
@@ -136,10 +136,26 @@ const statusStyles = {
 const defaultStatusStyle =
   "bg-amber-500/20 text-amber-600 border border-amber-500/30";
 
+// Defined at module level: declaring it inside ProjectsSection created a new
+// component type on every render, remounting each card's highlight list.
+const ProjectHighlights = ({ highlights }) => (
+  <div className="space-y-2">
+    {highlights.map((highlight, index) => (
+      <div key={index} className="flex items-center gap-2 text-sm">
+        <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+        <span className="text-muted-foreground">{highlight}</span>
+      </div>
+    ))}
+  </div>
+);
+
+ProjectHighlights.propTypes = {
+  highlights: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
 export const ProjectsSection = () => {
   const [showAll, setShowAll] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
-  const [hoveredProject, setHoveredProject] = useState(null);
   const sectionRef = useRef(null);
 
   const filteredProjects = activeFilter === "All"
@@ -155,22 +171,6 @@ export const ProjectsSection = () => {
     setShowAll(false);
     // setIsMobileFilterOpen(false);
   };
-
-  const ProjectHighlights = ({ highlights }) => (
-    <div className="space-y-2">
-      {highlights.map((highlight, index) => (
-        <div key={index} className="flex items-center gap-2 text-sm">
-          <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-          <span className="text-muted-foreground">{highlight}</span>
-        </div>
-      ))}
-    </div>
-  );
-
-  ProjectHighlights.propTypes = {
-    highlights: PropTypes.arrayOf(PropTypes.string).isRequired,
-  };
-
 
   return (
     <section
@@ -268,8 +268,6 @@ export const ProjectsSection = () => {
                   stiffness: 100
                 }}
                 className="group"
-                onMouseEnter={() => setHoveredProject(project.id)}
-                onMouseLeave={() => setHoveredProject(null)}
               >
                 <div className="relative bg-background border border-border rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 h-full flex flex-col">
 
@@ -280,6 +278,7 @@ export const ProjectsSection = () => {
                       alt={project.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
+                      decoding="async"
                     />
 
                     {/* Status Badge */}
@@ -296,12 +295,9 @@ export const ProjectsSection = () => {
                       </span>
                     </div>
 
-                    {/* Hover Actions */}
-                    <motion.div
-                      className="absolute inset-0 bg-black/50 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: hoveredProject === project.id ? 1 : 0 }}
-                    >
+                    {/* Hover Actions: shown by CSS on card hover, or when its
+                        link has keyboard focus. */}
+                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity duration-300">
 
 
                       {/* Code Button */}
@@ -316,7 +312,7 @@ export const ProjectsSection = () => {
                         <Github size={16} />
                         View Code
                       </motion.a>
-                    </motion.div>
+                    </div>
                   </div>
 
                   {/* Content Section */}

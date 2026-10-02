@@ -148,6 +148,23 @@
     @apply bg-background text-foreground transition-colors duration-300;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+
+  /* Reduced motion: stop decorative looping CSS animations and smooth
+     scrolling. Functional motion (e.g. the animate-spin loading indicator)
+     is intentionally left alone. !important is needed because AboutSection
+     redefines .animate-float in an inline <style> later in the document. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    .animate-float,
+    .animate-pulse,
+    .animate-ping,
+    .animate-pulse-subtle {
+      animation: none !important;
+    }
+  }
 }
 
 @utility container {

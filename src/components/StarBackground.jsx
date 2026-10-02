@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 
 // id, size, x, y, opacity, animationDuration
 // id, size, x, y, delay, animationDuration
@@ -6,19 +7,31 @@ import { useEffect, useState } from "react";
 export const StarBackground = () => {
   const [stars, setStars] = useState([]);
   const [meteors, setMeteors] = useState([]);
+  // Stars and meteors are white, so they are only visible (and only worth
+  // rendering and animating) on the dark theme.
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   useEffect(() => {
+    if (!isDark) return;
+
     generateStars();
     generateMeteors();
 
+    // Regenerate once the resize settles rather than on every resize event.
+    let resizeTimer;
     const handleResize = () => {
-      generateStars();
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(generateStars, 150);
     };
 
     window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      clearTimeout(resizeTimer);
+    };
+  }, [isDark]);
 
   const generateStars = () => {
     const numberOfStars = Math.floor(
@@ -59,12 +72,15 @@ export const StarBackground = () => {
     setMeteors(newMeteors);
   };
 
+  if (!isDark) return null;
+
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      {/* Reduced motion: stars stay lit but stop twinkling; meteors are hidden. */}
       {stars.map((star) => (
         <div
           key={star.id}
-          className="star animate-pulse-subtle"
+          className="star motion-safe:animate-pulse-subtle"
           style={{
             width: star.size + "px",
             height: star.size + "px",
@@ -79,7 +95,7 @@ export const StarBackground = () => {
       {meteors.map((meteor) => (
         <div
           key={meteor.id}
-          className="meteor animate-meteor"
+          className="meteor animate-meteor motion-reduce:hidden"
           style={{
             width: meteor.size * 50 + "px",
             height: meteor.size * 2 + "px",

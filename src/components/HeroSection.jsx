@@ -8,7 +8,7 @@ import {
   Briefcase,
   Mail,
 } from "lucide-react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
 const codeSnippets = [
@@ -51,11 +51,91 @@ const createFloatingShapes = () =>
     },
   }));
 
+// Typing state lives here rather than in HeroSection so each 30ms tick
+// re-renders only the code block, not the whole hero.
+const TypedCode = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref);
+  const shouldReduceMotion = useReducedMotion();
+  const [currentCodeLine, setCurrentCodeLine] = useState(0);
+  const [displayedCode, setDisplayedCode] = useState("");
+
+  // Each step schedules exactly one timeout and clears it on cleanup, so
+  // unmounting (or a re-run) never leaves stray timers behind. Typing pauses
+  // while scrolled out of view and is skipped entirely for reduced motion.
+  useEffect(() => {
+    if (shouldReduceMotion || !isInView) return;
+
+    const currentLine = codeSnippets[currentCodeLine];
+    let timeoutId;
+
+    if (displayedCode.length < currentLine.length) {
+      timeoutId = setTimeout(() => {
+        setDisplayedCode(currentLine.slice(0, displayedCode.length + 1));
+      }, 30);
+    } else if (currentCodeLine < codeSnippets.length - 1) {
+      timeoutId = setTimeout(() => {
+        setCurrentCodeLine(prev => prev + 1);
+        setDisplayedCode("");
+      }, 800);
+    } else {
+      // Pause on the finished snippet (800ms line delay + 5s hold), then restart.
+      timeoutId = setTimeout(() => {
+        setCurrentCodeLine(0);
+        setDisplayedCode("");
+      }, 5800);
+    }
+
+    return () => clearTimeout(timeoutId);
+  }, [displayedCode, currentCodeLine, isInView, shouldReduceMotion]);
+
+  // With reduced motion every line is shown in full and no cursor is drawn.
+  const activeLine = shouldReduceMotion ? codeSnippets.length : currentCodeLine;
+
+  return (
+    <div ref={ref} className="grid grid-cols-1 gap-1 h-full content-start">
+      {codeSnippets.map((line, index) => (
+        <div
+          key={index}
+          className={`
+            min-h-[20px] flex items-start
+            ${index < activeLine ? 'opacity-100' : 'opacity-0'}
+            ${index === activeLine ? 'opacity-100' : ''}
+            transition-opacity duration-150 ease-in-out
+            ${line.includes("import") ? "text-purple-400 font-semibold" :
+              line.includes("const") || line.includes("new") ? "text-blue-400 font-semibold" :
+                line.includes("React") || line.includes("Node.js") || line.includes("TypeScript") ? "text-cyan-400" :
+                  line.includes("FullStackDeveloper") ? "text-emerald-400 font-semibold" :
+                    line.includes("//") ? "text-muted-foreground italic" :
+                      line.includes("await") || line.includes("connect") ? "text-yellow-400" :
+                        line.includes("'") ? "text-amber-400" :
+                          "text-foreground"}
+          `}
+        >
+          {index < activeLine ? line : ''}
+          {index === activeLine ? (
+            <>
+              {displayedCode}
+              <motion.span
+                animate={{ opacity: [1, 0, 1] }}
+                transition={{ duration: 0.8, repeat: Infinity }}
+                className="ml-1 text-primary inline-block"
+              >
+                ▊
+              </motion.span>
+            </>
+          ) : ''}
+          {line === '' && '‎'}
+        </div>
+      ))}
+    </div>
+  );
+};
+
 export const HeroSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-  const [currentCodeLine, setCurrentCodeLine] = useState(0);
-  const [displayedCode, setDisplayedCode] = useState("");
+  const shouldReduceMotion = useReducedMotion();
   const [floatingShapes] = useState(createFloatingShapes);
 
   const achievements = [
@@ -81,32 +161,6 @@ export const HeroSection = () => {
     },
   ];
 
-  // Each step schedules exactly one timeout and clears it on cleanup, so
-  // unmounting (or a re-run) never leaves stray timers behind.
-  useEffect(() => {
-    const currentLine = codeSnippets[currentCodeLine];
-    let timeoutId;
-
-    if (displayedCode.length < currentLine.length) {
-      timeoutId = setTimeout(() => {
-        setDisplayedCode(currentLine.slice(0, displayedCode.length + 1));
-      }, 30);
-    } else if (currentCodeLine < codeSnippets.length - 1) {
-      timeoutId = setTimeout(() => {
-        setCurrentCodeLine(prev => prev + 1);
-        setDisplayedCode("");
-      }, 800);
-    } else {
-      // Pause on the finished snippet (800ms line delay + 5s hold), then restart.
-      timeoutId = setTimeout(() => {
-        setCurrentCodeLine(0);
-        setDisplayedCode("");
-      }, 5800);
-    }
-
-    return () => clearTimeout(timeoutId);
-  }, [displayedCode, currentCodeLine]);
-
   const handleViewResume = () => {
     // Open resume in new tab
     window.open('/Dhruvil-Patel-Resume.pdf', '_blank', 'noopener,noreferrer');
@@ -120,18 +174,20 @@ export const HeroSection = () => {
           <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.1)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black,transparent)]" />
         </div>
 
+        {/* Decorative loops below are held still when reduced motion is
+            requested (shapes keep their mid-range opacity so they stay subtle). */}
         {floatingShapes.map((shape, i) => (
           <motion.div
             key={i}
             className="absolute bg-gradient-to-r from-primary/10 to-purple-500/10 rounded-lg"
             style={shape.style}
-            animate={shape.animate}
-            transition={shape.transition}
+            animate={shouldReduceMotion ? { opacity: 0.15 } : shape.animate}
+            transition={shouldReduceMotion ? undefined : shape.transition}
           />
         ))}
 
-        <motion.div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 blur-[100px]" animate={{ x: [0, 30, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }} transition={{ duration: 15, repeat: Infinity }} />
-        <motion.div className="absolute bottom-20 right-10 w-72 h-72 rounded-full bg-gradient-to-r from-cyan-400/10 to-emerald-500/10 blur-[100px]" animate={{ x: [0, -40, 0], y: [0, 40, 0], scale: [1, 1.2, 1] }} transition={{ duration: 20, repeat: Infinity, delay: 2 }} />
+        <motion.div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 blur-[100px]" animate={shouldReduceMotion ? undefined : { x: [0, 30, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }} transition={{ duration: 15, repeat: Infinity }} />
+        <motion.div className="absolute bottom-20 right-10 w-72 h-72 rounded-full bg-gradient-to-r from-cyan-400/10 to-emerald-500/10 blur-[100px]" animate={shouldReduceMotion ? undefined : { x: [0, -40, 0], y: [0, 40, 0], scale: [1, 1.2, 1] }} transition={{ duration: 20, repeat: Infinity, delay: 2 }} />
       </div>
 
       <div className="container max-w-7xl mx-auto w-full mt-16 sm:mt-0">
@@ -145,7 +201,7 @@ export const HeroSection = () => {
 
             <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
               <span className="block text-foreground">I'm Dhruvil</span>
-              <motion.span className="block bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent mt-2" animate={{ backgroundPosition: ['0%', '100%', '0%'] }} transition={{ duration: 8, repeat: Infinity }} style={{ backgroundSize: '200% 100%' }}>
+              <motion.span className="block bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent mt-2" animate={shouldReduceMotion ? undefined : { backgroundPosition: ['0%', '100%', '0%'] }} transition={{ duration: 8, repeat: Infinity }} style={{ backgroundSize: '200% 100%' }}>
                 Software Engineer
               </motion.span>
             </motion.h1>
@@ -221,46 +277,11 @@ export const HeroSection = () => {
 
                 <div className="font-mono text-sm bg-primary/5 rounded-lg border border-primary/10 min-h-[280px] flex">
                   <div className="p-6 w-full">
-                    <div className="grid grid-cols-1 gap-1 h-full content-start">
-                      {codeSnippets.map((line, index) => (
-                        <div
-                          key={index}
-                          className={`
-                            min-h-[20px] flex items-start
-                            ${index < currentCodeLine ? 'opacity-100' : 'opacity-0'}
-                            ${index === currentCodeLine ? 'opacity-100' : ''}
-                            transition-opacity duration-150 ease-in-out
-                            ${line.includes("import") ? "text-purple-400 font-semibold" :
-                              line.includes("const") || line.includes("new") ? "text-blue-400 font-semibold" :
-                                line.includes("React") || line.includes("Node.js") || line.includes("TypeScript") ? "text-cyan-400" :
-                                  line.includes("FullStackDeveloper") ? "text-emerald-400 font-semibold" :
-                                    line.includes("//") ? "text-muted-foreground italic" :
-                                      line.includes("await") || line.includes("connect") ? "text-yellow-400" :
-                                        line.includes("'") ? "text-amber-400" :
-                                          "text-foreground"}
-                          `}
-                        >
-                          {index < currentCodeLine ? line : ''}
-                          {index === currentCodeLine ? (
-                            <>
-                              {displayedCode}
-                              <motion.span
-                                animate={{ opacity: [1, 0, 1] }}
-                                transition={{ duration: 0.8, repeat: Infinity }}
-                                className="ml-1 text-primary inline-block"
-                              >
-                                ▊
-                              </motion.span>
-                            </>
-                          ) : ''}
-                          {line === '' && '‎'}
-                        </div>
-                      ))}
-                    </div>
+                    <TypedCode />
                   </div>
                 </div>
 
-                <motion.div className="absolute -bottom-3 -right-3 w-14 h-14 bg-gradient-to-r from-primary to-purple-600 rounded-xl flex items-center justify-center border-2 border-background shadow-2xl" animate={{ y: [0, -5, 0], rotate: [0, -2, 0], scale: [1, 1.03, 1] }} transition={{ duration: 4, repeat: Infinity }}>
+                <motion.div className="absolute -bottom-3 -right-3 w-14 h-14 bg-gradient-to-r from-primary to-purple-600 rounded-xl flex items-center justify-center border-2 border-background shadow-2xl" animate={shouldReduceMotion ? undefined : { y: [0, -5, 0], rotate: [0, -2, 0], scale: [1, 1.03, 1] }} transition={{ duration: 4, repeat: Infinity }}>
                   <Code className="h-5 w-5 text-white" />
                 </motion.div>
 
@@ -279,13 +300,13 @@ export const HeroSection = () => {
         </motion.div>
       </div>
 
-      <motion.div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center" initial={{ opacity: 0, y: 20 }} animate={{ opacity: [0, 1, 1, 0], y: [0, 6, 0, -6] }} transition={{ duration: 3, repeat: Infinity, repeatDelay: 0.5 }}>
+      <motion.div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center" initial={{ opacity: 0, y: 20 }} animate={shouldReduceMotion ? { opacity: 1 } : { opacity: [0, 1, 1, 0], y: [0, 6, 0, -6] }} transition={shouldReduceMotion ? undefined : { duration: 3, repeat: Infinity, repeatDelay: 0.5 }}>
         <motion.div className="text-xs text-primary mb-3 flex items-center gap-2 px-4 py-2 rounded-full bg-background/80 backdrop-blur-sm border border-border shadow-lg" whileHover={{ scale: 1.05 }}>
           <MousePointerClick className="h-3 w-3" />
           <span>Explore Technical Portfolio</span>
         </motion.div>
-        <motion.div animate={{ y: [0, 4, 0] }} transition={{ duration: 2, repeat: Infinity }} className="w-5 h-8 border-2 border-primary/30 rounded-full flex justify-center">
-          <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }} className="w-1 h-2 bg-primary rounded-full mt-2" />
+        <motion.div animate={shouldReduceMotion ? undefined : { y: [0, 4, 0] }} transition={{ duration: 2, repeat: Infinity }} className="w-5 h-8 border-2 border-primary/30 rounded-full flex justify-center">
+          <motion.div animate={shouldReduceMotion ? undefined : { y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }} className="w-1 h-2 bg-primary rounded-full mt-2" />
         </motion.div>
       </motion.div>
     </section>

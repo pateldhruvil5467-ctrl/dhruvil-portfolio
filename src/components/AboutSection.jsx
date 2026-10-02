@@ -11,13 +11,14 @@ import {
   Mail,
   Star,
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 export const AboutSection = () => {
   const [activeTab, setActiveTab] = useState('personal');
   const [counter, setCounter] = useState(0);
   const primaryShapeRef = useRef(null);
   const secondaryShapeRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const achievements = [
     {
@@ -135,7 +136,15 @@ export const AboutSection = () => {
 
   // Mouse parallax for the background shapes. Transforms are written directly
   // to the DOM (once per frame) so mouse movement doesn't re-render the section.
+  // Skipped entirely when reduced motion is requested.
   useEffect(() => {
+    if (shouldReduceMotion) {
+      [primaryShapeRef, secondaryShapeRef].forEach((shapeRef) => {
+        if (shapeRef.current) shapeRef.current.style.transform = '';
+      });
+      return;
+    }
+
     let frameId = 0;
 
     const handleMouseMove = (e) => {
@@ -156,7 +165,7 @@ export const AboutSection = () => {
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(frameId);
     };
-  }, []);
+  }, [shouldReduceMotion]);
 
   useEffect(() => {
     const interval = setInterval(() => setCounter(prev => (prev + 1) % 4), 2000);
@@ -231,6 +240,8 @@ export const AboutSection = () => {
                         src="/Dhruvil_Photo.jpg"
                         alt="Dhruvil Patel"
                         className="w-full h-full object-cover"
+                        loading="lazy"
+                        decoding="async"
                       />
                       <div className="absolute -bottom-2 -right-2 w-6 h-6 sm:w-8 sm:h-8 bg-green-500 rounded-full border-4 border-background flex items-center justify-center">
                         <div className="w-2 h-2 bg-green-300 rounded-full animate-pulse" />

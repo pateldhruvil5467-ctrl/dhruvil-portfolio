@@ -39,21 +39,49 @@ const WelcomeScreen = ({ onWelcomeComplete }) => {
   ];
 
   useEffect(() => {
-    const phase1 = setTimeout(() => setPhase(1), 800);
-    const phase2 = setTimeout(() => setPhase(2), 1600);
-    const phase3 = setTimeout(() => setPhase(3), 2400);
-    const complete = setTimeout(() => {
-      setExitAnimation(true);
-      setTimeout(onWelcomeComplete, 1000);
-    }, 5000);
+    const timers = [
+      setTimeout(() => setPhase(1), 800),
+      setTimeout(() => setPhase(2), 1600),
+      setTimeout(() => setPhase(3), 2400),
+      setTimeout(() => setExitAnimation(true), 5000),
+    ];
+
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  // Unmount once the 1s exit animation has played (tracked so it is cleared
+  // on unmount instead of firing later).
+  useEffect(() => {
+    if (!exitAnimation) return;
+
+    const timer = setTimeout(onWelcomeComplete, 1000);
+    return () => clearTimeout(timer);
+  }, [exitAnimation, onWelcomeComplete]);
+
+  // The page is already mounted underneath: keep it from scrolling while the
+  // intro is up, and let visitors skip the intro by clicking, pressing
+  // Escape/Enter/Space, or trying to scroll.
+  useEffect(() => {
+    const root = document.documentElement;
+    const previousOverflow = root.style.overflow;
+    root.style.overflow = "hidden";
+
+    const skip = () => setExitAnimation(true);
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" || e.key === "Enter" || e.key === " ") skip();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("wheel", skip, { passive: true });
+    window.addEventListener("touchmove", skip, { passive: true });
 
     return () => {
-      clearTimeout(phase1);
-      clearTimeout(phase2);
-      clearTimeout(phase3);
-      clearTimeout(complete);
+      root.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("wheel", skip);
+      window.removeEventListener("touchmove", skip);
     };
-  }, [onWelcomeComplete]);
+  }, []);
 
   useEffect(() => {
     if (phase >= 2) {
@@ -126,7 +154,15 @@ const WelcomeScreen = ({ onWelcomeComplete }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden">
+    // z-[60] keeps the intro above the page's own fixed z-50 navbar, which is
+    // now mounted underneath it. The solid backdrop stops the page showing
+    // through while the intro fades in, and is dropped on exit so the
+    // slide-up reveals the page.
+    <div
+      className="fixed inset-0 z-[60] overflow-hidden"
+      style={{ backgroundColor: exitAnimation ? "transparent" : currentColors.background }}
+      onClick={() => setExitAnimation(true)}
+    >
       {/* Welcome Screen */}
       <motion.div
         className="h-full w-full flex items-center justify-center p-4"

@@ -141,7 +141,6 @@ dhruvil-portfolio/
 │   ├── projects/
 │   ├── Dhruvil-Patel-Resume.pdf
 │   ├── Dhruvil_Photo.jpg
-│   ├── logo.png
 │   └── logo.svg
 │
 ├── src/

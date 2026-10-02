@@ -55,7 +55,11 @@ export const Navbar = () => {
   const lastScrollYRef = useRef(0);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let frameId = 0;
+
+    // Runs at most once per animation frame (see handleScroll below).
+    const updateFromScroll = () => {
+      frameId = 0;
       const currentScrollY = window.scrollY;
 
       if (currentScrollY > lastScrollYRef.current && currentScrollY > 100) {
@@ -86,8 +90,17 @@ export const Navbar = () => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Scroll events can fire many times per frame; batch them so the section
+    // layout reads (offsetTop/offsetHeight) happen once per frame at most.
+    const handleScroll = () => {
+      if (!frameId) frameId = requestAnimationFrame(updateFromScroll);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(frameId);
+    };
   }, []);
 
   return (
@@ -162,7 +175,7 @@ export const Navbar = () => {
       <motion.div
         className={cn(
           "fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50",
-          "transition-transform duration-300 ease-in-out",
+          "transition-transform duration-300 ease-in-out motion-reduce:transition-none",
           showNavbar ? "translate-y-0" : "translate-y-full"
         )}
         style={{ willChange: "transform" }}
