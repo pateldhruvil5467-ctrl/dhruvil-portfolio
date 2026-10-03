@@ -203,14 +203,14 @@ export const AboutSection = () => {
             </div>
             <span className="text-sm sm:text-base font-semibold text-primary tracking-wide">ABOUT ME</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6">
             <span className="bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
               Building Software
             </span>
             <span className="block text-primary">
               That Solves Real Problems
             </span>
-          </h1>
+          </h2>
 
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             I build practical software solutions combining{" "}
