@@ -10,16 +10,17 @@ import {
 } from "lucide-react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import profile from "../content/profile";
 
 const codeSnippets = [
   "const developer = new SoftwareEngineer({",
   "",
-  "  name: 'Dhruvil Patel',",
+  `  name: '${profile.name}',`,
   "  education: 'MSc Software Engineering',",
   "  stack: ['Java', 'Spring Boot', 'React', 'Python'],",
   "  focus: ['AI', 'Automation', 'Backend Systems'],",
-  "  location: 'Berlin, Germany',",
-  "  status: 'Open to opportunities',",
+  `  location: '${profile.location.city}, ${profile.location.country}',`,
+  `  status: '${profile.availability.status}',`,
   "",
   "});",
   "",
@@ -155,15 +156,15 @@ export const HeroSection = () => {
       icon: <Zap className="h-3 w-3" />,
     },
     {
-      number: "Berlin",
-      label: "Germany",
+      number: profile.location.city,
+      label: profile.location.country,
       icon: <Briefcase className="h-3 w-3" />,
     },
   ];
 
   const handleViewResume = () => {
     // Open resume in new tab
-    window.open('/Dhruvil-Patel-Resume.pdf', '_blank', 'noopener,noreferrer');
+    window.open(profile.resume, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -200,9 +201,9 @@ export const HeroSection = () => {
             </motion.div>
 
             <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
-              <span className="block text-foreground">I'm Dhruvil</span>
+              <span className="block text-foreground">I'm {profile.firstName}</span>
               <motion.span className="block bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent mt-2" animate={shouldReduceMotion ? undefined : { backgroundPosition: ['0%', '100%', '0%'] }} transition={{ duration: 8, repeat: Infinity }} style={{ backgroundSize: '200% 100%' }}>
-                Software Engineer
+                {profile.headline}
               </motion.span>
             </motion.h1>
 
@@ -254,7 +255,7 @@ export const HeroSection = () => {
 
             <motion.div className="mt-6 text-center lg:text-left" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
               <div className="text-sm text-muted-foreground">
-                🚀 <span className="text-primary font-semibold">Open to opportunities</span> in Software Engineering, Full-Stack Development, and AI/Automation.
+                🚀 <span className="text-primary font-semibold">{profile.availability.status}</span> in Software Engineering, Full-Stack Development, and AI/Automation.
               </div>
             </motion.div>
           </div>

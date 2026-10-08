@@ -12,6 +12,7 @@ import {
   Star,
 } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import profile from '../content/profile';
 
 export const AboutSection = () => {
   const [activeTab, setActiveTab] = useState('personal');
@@ -40,59 +41,14 @@ export const AboutSection = () => {
       suffix: "",
     },
     {
-      number: "Berlin",
-      label: "Germany",
+      number: profile.location.city,
+      label: profile.location.country,
       icon: <User className="h-5 w-5" />,
       suffix: "",
     },
   ];
 
-  const techStack = [
-    {
-      category: "Languages",
-      items: [
-        "Java",
-        "Python",
-        "JavaScript",
-        "TypeScript",
-        "C++",
-        "SQL",
-      ],
-    },
-    {
-      category: "Backend",
-      items: [
-        "Spring Boot",
-        "Node.js",
-        "Express.js",
-        "Flask",
-        "REST APIs",
-        "JWT",
-      ],
-    },
-    {
-      category: "Frontend",
-      items: [
-        "React",
-        "Vite",
-        "Tailwind CSS",
-        "HTML",
-        "CSS",
-      ],
-    },
-    {
-      category: "Data & Tools",
-      items: [
-        "MySQL",
-        "PostgreSQL",
-        "MongoDB",
-        "Git",
-        "GitHub",
-        "Docker",
-        "AWS",
-      ],
-    },
-  ];
+  const techStack = profile.aboutTechStack;
 
   const features = [
     "Strong software engineering fundamentals",
@@ -106,19 +62,19 @@ export const AboutSection = () => {
   const socialLinks = [
     {
       icon: <Github className="h-5 w-5" />,
-      href: "https://github.com/pateldhruvil5467-ctrl",
+      href: profile.social.github,
       label: "GitHub",
       external: true,
     },
     {
       icon: <Linkedin className="h-5 w-5" />,
-      href: "https://www.linkedin.com/in/dhruvil-patel12/",
+      href: profile.social.linkedin,
       label: "LinkedIn",
       external: true,
     },
     {
       icon: <Mail className="h-5 w-5" />,
-      href: "mailto:pateldhruvil5467@gmail.com",
+      href: `mailto:${profile.contact.email}`,
       label: "Email",
       external: false,
     },
@@ -175,8 +131,8 @@ export const AboutSection = () => {
   // Programmatic download function
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = '/Dhruvil-Patel-Resume.pdf'; // Must be in public folder
-    link.download = 'Dhruvil-Patel-Resume.pdf';
+    link.href = profile.resume; // Must be in public folder
+    link.download = profile.resume.split('/').pop();
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -238,7 +194,7 @@ export const AboutSection = () => {
                     <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-4 border-primary/20 shadow-2xl transition-all duration-500 group-hover:border-primary/40 group-hover:scale-105 md:group-hover:scale-110 relative">
                       <img
                         src="/Dhruvil_Photo.jpg"
-                        alt="Dhruvil Patel"
+                        alt={profile.name}
                         className="w-full h-full object-cover"
                         loading="lazy"
                         decoding="async"
@@ -252,11 +208,11 @@ export const AboutSection = () => {
                   {/* Achievements */}
                   <div className="flex-1 text-center md:text-left">
                     <h2 className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">
-                      Dhruvil Patel
+                      {profile.name}
                     </h2>
 
                     <p className="text-primary text-base sm:text-lg font-semibold mb-3 sm:mb-4">
-                      Software Engineer
+                      {profile.headline}
                     </p>
                     <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
                       {achievements.map((achievement, index) => (
@@ -392,7 +348,7 @@ export const AboutSection = () => {
             </span>
 
             <div className="text-[10px] sm:text-xs text-muted-foreground text-center bg-background/50 rounded-lg p-1 sm:p-2">
-              Working Student • Internship • Junior Software Engineering
+              {profile.availability.roles.join(" • ")}
             </div>
 
           </div>

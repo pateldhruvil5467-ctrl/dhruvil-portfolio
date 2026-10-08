@@ -2,6 +2,7 @@ import { ArrowRight, Github, ChevronUp, Star, Sparkles, Zap } from "lucide-react
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import PropTypes from "prop-types";
+import profile from "../content/profile";
 
 const projects = [
   {
@@ -451,7 +452,7 @@ export const ProjectsSection = () => {
               </motion.a>
 
               <motion.a
-                href="https://github.com/pateldhruvil5467-ctrl"
+                href={profile.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}

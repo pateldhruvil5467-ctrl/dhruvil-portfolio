@@ -2,11 +2,12 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Code } from "lucide-react";
 import { Link } from "react-router-dom";
+import profile from "../content/profile";
 
 export const NotFound = () => {
   useEffect(() => {
     const originalTitle = document.title;
-    document.title = "404 - Page Not Found | Dhruvil Patel";
+    document.title = `404 - Page Not Found | ${profile.name}`;
     return () => {
       document.title = originalTitle;
     };
@@ -170,7 +171,7 @@ export const NotFound = () => {
           </Link>
 
           <motion.a
-            href="https://github.com/pateldhruvil5467-ctrl"
+            href={profile.social.github}
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 justify-center group relative overflow-hidden px-4 py-2 sm:px-5 sm:py-3 rounded-xl font-semibold border border-primary/50 text-foreground hover:border-primary transition-all duration-300 bg-background/80 backdrop-blur-sm flex items-center gap-2 text-xs sm:text-sm"

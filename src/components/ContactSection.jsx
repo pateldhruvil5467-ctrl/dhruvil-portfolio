@@ -10,6 +10,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+import profile from "../content/profile";
 
 export const ContactSection = () => {
   const { toast } = useToast();
@@ -106,7 +107,7 @@ export const ContactSection = () => {
       toast({
         title: "Oops! Something went wrong",
         description:
-          "Please try again or email me directly at pateldhruvil5467@gmail.com",
+          `Please try again or email me directly at ${profile.contact.email}`,
         variant: "destructive",
       });
     } finally {
@@ -156,10 +157,10 @@ export const ContactSection = () => {
                   </p>
 
                   <a
-                    href="mailto:pateldhruvil5467@gmail.com"
+                    href={`mailto:${profile.contact.email}`}
                     className="text-sm sm:text-base font-medium hover:text-primary transition-colors"
                   >
-                    pateldhruvil5467@gmail.com
+                    {profile.contact.email}
                   </a>
                 </div>
               </div>
@@ -176,10 +177,10 @@ export const ContactSection = () => {
                   </p>
 
                   <a
-                    href="tel:+4915565827420"
+                    href={profile.contact.phoneHref}
                     className="text-sm sm:text-base font-medium hover:text-primary transition-colors"
                   >
-                    +49 15565827420
+                    {profile.contact.phone}
                   </a>
                 </div>
               </div>
@@ -196,7 +197,7 @@ export const ContactSection = () => {
                   </p>
 
                   <span className="text-sm sm:text-base font-medium">
-                    Berlin, Germany
+                    {profile.location.city}, {profile.location.country}
                   </span>
                 </div>
               </div>
@@ -213,12 +214,12 @@ export const ContactSection = () => {
                   {
                     icon: Linkedin,
                     label: "LinkedIn",
-                    url: "https://www.linkedin.com/in/dhruvil-patel12/",
+                    url: profile.social.linkedin,
                   },
                   {
                     icon: Github,
                     label: "GitHub",
-                    url: "https://github.com/pateldhruvil5467-ctrl",
+                    url: profile.social.github,
                   },
                 ].map((social, index) => {
                   const Icon = social.icon;

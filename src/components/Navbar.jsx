@@ -16,6 +16,7 @@ import {
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
+import profile from "../content/profile";
 
 const navItems = [
   { name: "Home", href: "#hero", icon: Home },
@@ -114,7 +115,7 @@ export const Navbar = () => {
       >
         {/* GitHub */}
         <motion.a
-          href="https://github.com/pateldhruvil5467-ctrl"
+          href={profile.social.github}
           target="_blank"
           rel="noopener noreferrer"
           className={cn(
@@ -133,7 +134,7 @@ export const Navbar = () => {
 
         {/* LinkedIn */}
         <motion.a
-          href="https://www.linkedin.com/in/dhruvil-patel12/"
+          href={profile.social.linkedin}
           target="_blank"
           rel="noopener noreferrer"
           className={cn(
@@ -152,7 +153,7 @@ export const Navbar = () => {
 
         {/* Resume */}
         <motion.a
-          href="/Dhruvil-Patel-Resume.pdf"
+          href={profile.resume}
           target="_blank"
           rel="noopener noreferrer"
           className={cn(

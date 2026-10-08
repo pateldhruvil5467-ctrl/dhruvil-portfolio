@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { useTheme } from "next-themes";
+import profile from "../content/profile";
+
+// Module level so the typing effect can use it without listing it as a
+// dependency (it never changes at runtime).
+const displayName = profile.name;
 
 const WelcomeScreen = ({ onWelcomeComplete }) => {
   const [phase, setPhase] = useState(0);
@@ -30,7 +35,6 @@ const WelcomeScreen = ({ onWelcomeComplete }) => {
   };
 
   const currentColors = colors[theme] || colors.dark;
-  const displayName = "Dhruvil Patel";
   const welcomeMessages = [
     "Software Engineer",
     "AI & Automation Enthusiast",
@@ -240,7 +244,7 @@ const WelcomeScreen = ({ onWelcomeComplete }) => {
                   style={{ color: currentColors.secondary }}
                   variants={contentVariants}
                 >
-                  I'm Dhruvil
+                  I'm {profile.firstName}
                   <motion.span
                     className="absolute -bottom-1 sm:-bottom-2 left-0 h-0.5 sm:h-1 w-full"
                     style={{ backgroundColor: currentColors.secondary }}

@@ -6,13 +6,14 @@ import {
   Phone,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import profile from "../content/profile";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: <Linkedin size={18} />, href: "https://www.linkedin.com/in/dhruvil-patel12/", label: "LinkedIn" },
-    { icon: <Github size={18} />, href: "https://github.com/pateldhruvil5467-ctrl", label: "GitHub" },
+    { icon: <Linkedin size={18} />, href: profile.social.linkedin, label: "LinkedIn" },
+    { icon: <Github size={18} />, href: profile.social.github, label: "GitHub" },
   ];
 
   const quickLinks = [
@@ -26,8 +27,8 @@ export const Footer = () => {
   ];
 
   const contactInfo = [
-    { icon: <Mail size={16} />, text: "pateldhruvil5467@gmail.com", href: "mailto:pateldhruvil5467@gmail.com" },
-    { icon: <Phone size={16} />, text: "+49 15565827420", href: "tel:+4915565827420" },
+    { icon: <Mail size={16} />, text: profile.contact.email, href: `mailto:${profile.contact.email}` },
+    { icon: <Phone size={16} />, text: profile.contact.phone, href: profile.contact.phoneHref },
   ];
 
   const containerVariants = {
@@ -66,7 +67,7 @@ export const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Branding */}
             <motion.div variants={itemVariants} className="space-y-4 text-left">
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white">DHRUVIL PATEL</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white">{profile.name.toUpperCase()}</h3>
               <p className="text-gray-600 dark:text-gray-300 text-sm">
                 Software Engineer | Java | Spring Boot | React | Python | AI & Automation
               </p>
@@ -149,7 +150,7 @@ export const Footer = () => {
             viewport={{ once: true }}
           >
             <div>
-              <p>© {currentYear} Dhruvil Patel. All rights reserved.</p>
+              <p>© {currentYear} {profile.name}. All rights reserved.</p>
             </div>
 
             <div className="flex items-center space-x-6">
