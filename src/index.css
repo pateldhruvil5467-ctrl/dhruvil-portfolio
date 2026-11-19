@@ -154,6 +154,9 @@
 
   html {
     @apply scroll-smooth;
+    /* Keep anchor jumps clear of the fixed header (Navbar.jsx): 64px bar
+       plus its 1px bottom border. */
+    scroll-padding-top: calc(4rem + 1px);
   }
 
   body {
