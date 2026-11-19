@@ -5,6 +5,13 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  /* Typography: Inter for body/UI text, Manrope for headings (both loaded in
+     index.html). --font-sans also becomes Tailwind's default font family.
+     --font-mono is left at Tailwind's default so monospace text is unchanged. */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-heading: "Manrope", "Inter", ui-sans-serif, system-ui, sans-serif;
+
   --color-border: hsl(var(--border));
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -82,58 +89,63 @@
 }
 
 @layer base {
+  /* Light theme: warm off-white, near-black text, forest-green accent.
+     Hex equivalents are noted for reference. */
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
+    --background: 45 28.6% 97.3%; /* #FAF9F6 */
+    --foreground: 100 4.6% 12.7%; /* #20221F */
 
-    --card: 0 0% 100%;
+    --card: 0 0% 100%; /* #FFFFFF */
 
-    --primary: 250 47% 60%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 150 32.9% 27.5%; /* #2F5D46 forest green */
+    --primary-foreground: 45 28.6% 97.3%; /* #FAF9F6 */
 
-    --border: 214 32% 91%;
+    --border: 44 17.5% 87.6%; /* #E5E2DA */
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 43 20% 93.1%; /* #F1EFEA */
+    /* #6F716A: the specified #73756E nudged 1.6% darker so secondary text
+       meets WCAG AA (4.7:1 on the background, 4.95:1 on cards). */
+    --muted-foreground: 77 3.2% 42.9%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary: 43 20% 93.1%; /* #F1EFEA */
+    --secondary-foreground: 100 4.6% 12.7%; /* #20221F */
 
-    --accent: 210 40% 94%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 42 20.8% 90.6%; /* #ECE9E2 */
+    --accent-foreground: 100 4.6% 12.7%; /* #20221F */
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 4 76.5% 40%; /* #B42318 */
+    --destructive-foreground: 45 28.6% 97.3%; /* #FAF9F6 */
 
-    --input: 214 32% 91%;
-    --ring: 250 47% 60%;
+    --input: 42 14.6% 82.5%; /* #D9D5CC */
+    --ring: 150 32.9% 27.5%; /* #2F5D46 */
   }
 
+  /* Dark theme: warm charcoal, warm off-white text, muted sage accent. */
   .dark {
-    --background: 222 47% 4%;
-    --foreground: 213 31% 91%;
+    --background: 80 8.6% 6.9%; /* #121310 */
+    --foreground: 45 17.4% 91%; /* #ECEAE4 */
 
-    --card: 222 47% 8%;
+    --card: 80 5.9% 10%; /* #1A1B18 */
 
-    --primary: 250 65% 65%;
-    --primary-foreground: 213 31% 91%;
+    --primary: 140 20.6% 62.9%; /* #8DB49A sage */
+    --primary-foreground: 80 8.6% 6.9%; /* #121310 */
 
-    --border: 217 33% 20%;
+    --border: 84 5.7% 17.1%; /* #2C2E29 */
 
-    --muted: 217 33% 14%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 90 6.5% 12.2%; /* #1F211D */
+    --muted-foreground: 75 3.9% 60%; /* #9B9D95 */
 
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 90 6.5% 12.2%; /* #1F211D */
+    --secondary-foreground: 45 17.4% 91%; /* #ECEAE4 */
 
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 77 9.3% 14.7%; /* #272922 */
+    --accent-foreground: 45 17.4% 91%; /* #ECEAE4 */
 
-    --destructive: 0 63% 45%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 5 52.1% 47.5%; /* #B8443A */
+    --destructive-foreground: 43 28% 95.1%; /* #F6F4EF */
 
-    --input: 217 33% 20%;
-    --ring: 250 65% 65%;
+    --input: 80 5.3% 22.4%; /* #3A3C36 */
+    --ring: 140 20.6% 62.9%; /* #8DB49A */
   }
 
   * {
@@ -147,6 +159,25 @@
   body {
     @apply bg-background text-foreground transition-colors duration-300;
     font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Headings use Manrope. Utility classes (e.g. font-mono, tracking-tight)
+     still override these base styles where components set them. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background-color: hsl(var(--primary) / 0.18);
+    color: hsl(var(--foreground));
   }
 
   /* Reduced motion: stop decorative looping CSS animations and smooth
