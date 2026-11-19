@@ -3,115 +3,16 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import PropTypes from "prop-types";
 import profile from "../content/profile";
+import projects from "../content/projects";
 
-const projects = [
-  {
-    id: "ai-job-search",
-    title: "AI-Powered Job Search & Shortlisting System",
-    category: "AI & Automation",
-    description:
-      "An AI-assisted job search automation system designed to reduce repetitive job discovery and shortlisting work through automated data collection, NLP-based processing, and browser automation.",
-    image: "/projects/ai-job-search.png",
-    tags: [
-      "Python",
-      "NLP",
-      "Selenium",
-      "Playwright",
-      "Automation",
-      "AI",
-    ],
-    githubUrl:
-      "https://github.com/pateldhruvil5467-ctrl/ai-job-search-agent",
-    featured: true,
-    accentColor: "from-blue-500 to-cyan-600",
-    status: "Completed",
-    highlights: [
-      "Automated job discovery",
-      "Job data extraction and filtering",
-      "AI-assisted shortlisting",
-    ],
-  },
-
-  {
-    id: "parallel-financial-analytics",
-    title: "Parallel Financial Analytics System",
-    category: "Systems & Performance",
-    description:
-      "A C++ financial analytics system that processes historical Tesla stock data using sequential and parallel algorithms, with benchmarking to compare performance across execution strategies.",
-    image: "/projects/parallel-financial-analytics.webp",
-    tags: [
-      "C++",
-      "OpenMP",
-      "MPI",
-      "Multithreading",
-      "Parallel Computing",
-      "Benchmarking",
-    ],
-    githubUrl:
-      "https://github.com/pateldhruvil5467-ctrl/ParallelFinancialAnalytics",
-    featured: true,
-    accentColor: "from-orange-500 to-red-600",
-    status: "Completed",
-    highlights: [
-      "Real-world financial dataset",
-      "Sequential vs parallel processing",
-      "Performance benchmarking",
-    ],
-  },
-
-  {
-    id: "technocloud",
-    title: "TechnoCloud",
-    category: "Full Stack",
-    description:
-      "A full-stack music application built with React and Node.js, combining a responsive frontend with backend services for application data and user interactions.",
-    image: "/projects/technocloud.png",
-    tags: [
-      "React",
-      "Node.js",
-      "JavaScript",
-      "REST APIs",
-      "Full Stack",
-      "Git",
-    ],
-    githubUrl:
-      "https://github.com/pateldhruvil5467-ctrl/technocloud",
-    featured: true,
-    accentColor: "from-purple-500 to-indigo-600",
-    status: "Completed",
-    highlights: [
-      "Full-stack application architecture",
-      "React-based frontend",
-      "Node.js backend services",
-    ],
-  },
-
-  {
-    id: "password-security-analyzer",
-    title: "Smart Password Security Analyzer",
-    category: "Security",
-    description:
-      "A Python-based password security application that analyzes password strength and applies security-focused techniques to help users understand password resilience.",
-    image: "/projects/password-security-analyzer.png",
-    tags: [
-      "Python",
-      "Flask",
-      "Password Security",
-      "zxcvbn",
-      "Hashing",
-    ],
-    githubUrl:
-      "https://github.com/pateldhruvil5467-ctrl/multi-attack-password-analyzer",
-    featured: false,
-    accentColor: "from-emerald-500 to-teal-600",
-    status: "Completed",
-    highlights: [
-      "Password strength analysis",
-      "Security-focused validation",
-      "Hashing techniques",
-    ],
-  },
-];
+// Accent bar under each card, keyed by project id (presentation only; the
+// project content itself lives in src/content/projects.js).
+const accentColors = {
+  "ai-job-search": "from-blue-500 to-cyan-600",
+  "parallel-financial-analytics": "from-orange-500 to-red-600",
+  technocloud: "from-purple-500 to-indigo-600",
+  "password-security-analyzer": "from-emerald-500 to-teal-600",
+};
 
 const categoryColors = {
   "AI & Automation":
@@ -375,7 +276,7 @@ export const ProjectsSection = () => {
                     </div>
 
                     {/* Accent Border */}
-                    <div className={`h-1 bg-gradient-to-r ${project.accentColor}`} />
+                    <div className={`h-1 bg-gradient-to-r ${accentColors[project.id]}`} />
                   </div>
                 </div>
               </motion.div>
